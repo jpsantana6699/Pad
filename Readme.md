@@ -2,8 +2,6 @@
 
 Um Sound Pad de memes brasileiros feito com **HTML**, **CSS** e **JavaScript**, com botões que tocam áudios engraçados da internet brasileira!
 
-![Preview](https://i.imgur.com/placeholder.png) *(imagem ilustrativa)*
-
 ## 🚀 Funcionalidades
 
 - Botões interativos que tocam sons ao serem clicados
@@ -15,7 +13,7 @@ Um Sound Pad de memes brasileiros feito com **HTML**, **CSS** e **JavaScript**, 
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/meme-sound-pad.git
+   git clone https://github.com/jpsantana6699/Pad.git
 
 2. Abra o arquivo index.html no seu navegador
 
