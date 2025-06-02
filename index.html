@@ -17,22 +17,44 @@
 
 </head>
 <body>
+    <header class="controls">
+        <button id="theme-toggle" class="control-btn">🌓</button>
+        <button id="stop-all" class="control-btn">⏹️ Parar Todos</button>
+        <button id="record-btn" class="control-btn">🎤 Gravar</button>
+        <button id="share-btn" class="control-btn">📤 Compartilhar</button>
+    </header>
 
     <h1>DJ JPZINNN</h1>
+    
+    <div class="keyboard-info">
+        <p>Use as teclas: Q, W, E, A, S, D, Z, X, C</p>
+    </div>
 
     <section class="teclado">
-        <button onclick="tocaSomJack()" class="tecla tecla_Jack">Jack</button>
-        <button onclick="tocaSomTome()" class="tecla tecla_Tome">Tome</button>
-        <button onclick="tocaSomDom()" class="tecla tecla_Dom">Dom</button>
+        <button onclick="tocaSomJack()" class="tecla tecla_Jack" data-key="q">Jack<span class="key-hint">Q</span></button>
+        <button onclick="tocaSomTome()" class="tecla tecla_Tome" data-key="w">Tome<span class="key-hint">W</span></button>
+        <button onclick="tocaSomDom()" class="tecla tecla_Dom" data-key="e">Dom<span class="key-hint">E</span></button>
 
-        <button onclick="tocaSomOruan()" class="tecla tecla_Oruan">Oruan</button>
-        <button onclick="tocaSomChavin()" class="tecla tecla_Chavin">Chavin</button>
-        <button onclick="tocaSomMorango()" class="tecla tecla_Morango">Morango</button>
+        <button onclick="tocaSomOruan()" class="tecla tecla_Oruan" data-key="a">Oruan<span class="key-hint">A</span></button>
+        <button onclick="tocaSomChavin()" class="tecla tecla_Chavin" data-key="s">Chavin<span class="key-hint">S</span></button>
+        <button onclick="tocaSomMorango()" class="tecla tecla_Morango" data-key="d">Morango<span class="key-hint">D</span></button>
 
-        <button onclick="tocaSomCebolinha()" class="tecla tecla_Cebolinha">Cebo</button>
-        <button onclick="tocaSomTung()" class="tecla tecla_Tung">Tung</button>
-        <button onclick="tocaSomGrosso()" class="tecla tecla_Grosso">Grosso</button>
+        <button onclick="tocaSomCebolinha()" class="tecla tecla_Cebolinha" data-key="z">Cebo<span class="key-hint">Z</span></button>
+        <button onclick="tocaSomTung()" class="tecla tecla_Tung" data-key="x">Tung<span class="key-hint">X</span></button>
+        <button onclick="tocaSomGrosso()" class="tecla tecla_Grosso" data-key="c">Grosso<span class="key-hint">C</span></button>
     </section>
+
+    <div id="record-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Gravar Novo Som</h2>
+            <button id="start-recording" class="record-control">🔴 Iniciar Gravação</button>
+            <button id="stop-recording" class="record-control" disabled>⏹️ Parar Gravação</button>
+            <audio id="recorded-audio" controls style="display: none;"></audio>
+            <input type="text" id="sound-name" placeholder="Nome do som" style="display: none;">
+            <button id="save-recording" class="record-control" style="display: none;">💾 Salvar</button>
+        </div>
+    </div>
 
     <audio src="sounds/jack.mp3" id="som_tecla_Jack"></audio>
     <audio src="sounds/tome.mp3" id="som_tecla_Tome"></audio>
@@ -45,6 +67,5 @@
     <audio src="sounds/Grosso.mp3" id="som_tecla_Grosso"></audio>
 
     <script src="main.js"></script>
-
 </body>
 </html>
