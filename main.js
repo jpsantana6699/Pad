@@ -4,11 +4,11 @@ function tocaSomJack() {
 
 document.querySelector('.tecla_Jack').onclick = tocaSomJack;
 
-function tocaSomGay() {
-  document.querySelector('#som_tecla_Gay').play()
+function tocaSomtome() {
+  document.querySelector('#som_tecla_Tome').play()
 }
 
-document.querySelector('.tecla_gay').onclick = tocaSomGay;
+document.querySelector('.tecla_Tome').onclick = tocaSomtome;
 
 function tocaSomDom() {
   document.querySelector('#som_tecla_Dom').play()
