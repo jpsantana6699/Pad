@@ -14,35 +14,123 @@
     <link rel="icon" type="image/png" href="images/bateria.png">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/estilos.css">
-
 </head>
 <body>
     <header class="controls">
         <button id="theme-toggle" class="control-btn">🌓</button>
+        <button id="fullscreen-btn" class="control-btn">⛶ Fullscreen</button>
         <button id="stop-all" class="control-btn">⏹️ Parar Todos</button>
         <button id="record-btn" class="control-btn">🎤 Gravar</button>
         <button id="share-btn" class="control-btn">📤 Compartilhar</button>
     </header>
 
+    <div class="top-panels">
+        <div class="theme-panel">
+            <h3>🎨 Temas</h3>
+            <div class="theme-buttons">
+                <button class="theme-btn" data-theme="default">Padrão</button>
+                <button class="theme-btn" data-theme="neon">Neon</button>
+                <button class="theme-btn" data-theme="retro">Retrô</button>
+                <button class="theme-btn" data-theme="minimal">Minimalista</button>
+            </div>
+        </div>
+
+        <div class="game-panel">
+            <h3>🎮 Jogos</h3>
+            <button id="simon-btn" class="game-btn">Simon Says</button>
+            <button id="challenges-btn" class="game-btn">Desafios</button>
+            <div id="game-score">Score: 0</div>
+            <div id="game-status"></div>
+        </div>
+
+        <div class="bpm-controls">
+            <h3>🥁 Ritmo</h3>
+            <label>BPM: <input type="range" id="bpm-slider" min="60" max="200" value="120"></label>
+            <span id="bpm-display">120</span>
+            <button id="metronome-toggle">🥁 Metrônomo</button>
+        </div>
+
+        <div class="sequencer-panel">
+            <h3>🎵 Sequenciador</h3>
+            <button id="seq-record">🔴 Gravar</button>
+            <button id="seq-play">▶️ Tocar</button>
+            <button id="seq-clear">🗑️ Limpar</button>
+            <div id="sequence-display">Sequência vazia</div>
+        </div>
+    </div>
+
     <h1>DJ JPZINNN</h1>
-    
+
     <div class="keyboard-info">
-        <p>Use as teclas: Q, W, E, A, S, D, Z, X, C</p>
+        <p>Use as teclas: Q, W, E, A, S, D, Z, X, C, R, T, Y, F, G, H</p>
     </div>
 
     <section class="teclado">
-        <button onclick="tocaSomJack()" class="tecla tecla_Jack" data-key="q">Jack<span class="key-hint">Q</span></button>
-        <button onclick="tocaSomTome()" class="tecla tecla_Tome" data-key="w">Tome<span class="key-hint">W</span></button>
-        <button onclick="tocaSomDom()" class="tecla tecla_Dom" data-key="e">Dom<span class="key-hint">E</span></button>
+        <button class="tecla tecla_Jack" data-key="q" data-sound="Jack">
+            Jack<span class="key-hint">Q</span>
+        </button>
+        <button class="tecla tecla_Tome" data-key="w" data-sound="Tome">
+            Tome<span class="key-hint">W</span>
+        </button>
+        <button class="tecla tecla_Dom" data-key="e" data-sound="Dom">
+            Dom<span class="key-hint">E</span>
+        </button>
+        <button class="tecla tecla_Oruan" data-key="a" data-sound="Oruan">
+            Oruan<span class="key-hint">A</span>
+        </button>
+        <button class="tecla tecla_Chavin" data-key="s" data-sound="Chavin">
+            Chavin<span class="key-hint">S</span>
+        </button>
 
-        <button onclick="tocaSomOruan()" class="tecla tecla_Oruan" data-key="a">Oruan<span class="key-hint">A</span></button>
-        <button onclick="tocaSomChavin()" class="tecla tecla_Chavin" data-key="s">Chavin<span class="key-hint">S</span></button>
-        <button onclick="tocaSomMorango()" class="tecla tecla_Morango" data-key="d">Morango<span class="key-hint">D</span></button>
+        <button class="tecla tecla_Morango" data-key="d" data-sound="Morango">
+            Morango<span class="key-hint">D</span>
+        </button>
+        <button class="tecla tecla_Cebolinha" data-key="z" data-sound="Cebolinha">
+            Cebo<span class="key-hint">Z</span>
+        </button>
+        <button class="tecla tecla_Tung" data-key="x" data-sound="Tung">
+            Tung<span class="key-hint">X</span>
+        </button>
+        <button class="tecla tecla_Grosso" data-key="c" data-sound="Grosso">
+            Grosso<span class="key-hint">C</span>
+        </button>
+        <button class="tecla tecla_Cavalo" data-key="r" data-sound="Cavalo">
+            Cavalo<span class="key-hint">R</span>
+        </button>
 
-        <button onclick="tocaSomCebolinha()" class="tecla tecla_Cebolinha" data-key="z">Cebo<span class="key-hint">Z</span></button>
-        <button onclick="tocaSomTung()" class="tecla tecla_Tung" data-key="x">Tung<span class="key-hint">X</span></button>
-        <button onclick="tocaSomGrosso()" class="tecla tecla_Grosso" data-key="c">Grosso<span class="key-hint">C</span></button>
+        <button class="tecla tecla_Otario" data-key="t" data-sound="Otario">
+            Otário<span class="key-hint">T</span>
+        </button>
+        <button class="tecla tecla_Uepa" data-key="y" data-sound="Uepa">
+            Uepa<span class="key-hint">Y</span>
+        </button>
+        <button class="tecla tecla_Ronaldinho" data-key="f" data-sound="Ronaldinho">
+            Ronaldinho<span class="key-hint">F</span>
+        </button>
+        <button class="tecla tecla_Ovo" data-key="g" data-sound="Ovo">
+            Ovo<span class="key-hint">G</span>
+        </button>
+        <button class="tecla tecla_Vinhetada" data-key="h" data-sound="Vinhetada">
+            Vinhetada<span class="key-hint">H</span>
+        </button>
     </section>
+
+    <div class="master-controls">
+        <label>Volume Master: <input type="range" id="master-volume" min="0" max="100" value="100"></label>
+        <label>Pitch Global: <input type="range" id="master-pitch" min="0.5" max="2" step="0.1" value="1"></label>
+    </div>
+
+    <div id="simon-modal" class="modal">
+        <div class="modal-content">
+            <span class="close simon-close">&times;</span>
+            <h2>🎮 Simon Says</h2>
+            <p>Reproduza a sequência de sons!</p>
+            <div id="simon-sequence"></div>
+            <button id="simon-start">Iniciar Jogo</button>
+            <div id="simon-score">Nível: 1</div>
+            <div id="simon-status">Clique em "Iniciar Jogo"</div>
+        </div>
+    </div>
 
     <div id="record-modal" class="modal">
         <div class="modal-content">
@@ -65,6 +153,16 @@
     <audio src="sounds/cebolinha.mp3" id="som_tecla_Cebolinha"></audio>
     <audio src="sounds/tung.mp3" id="som_tecla_Tung"></audio>
     <audio src="sounds/Grosso.mp3" id="som_tecla_Grosso"></audio>
+    <audio src="sounds/cavalo.mp3" id="som_tecla_Cavalo"></audio>
+    <audio src="sounds/otario.mp3" id="som_tecla_Otario"></audio>
+    <audio src="sounds/uepa.mp3" id="som_tecla_Uepa"></audio>
+    <audio src="sounds/ronaldinho.mp3" id="som_tecla_Ronaldinho"></audio>
+    <audio src="sounds/ovo.mp3" id="som_tecla_Ovo"></audio>
+    <audio src="sounds/vinhetada.mp3" id="som_tecla_Vinhetada"></audio>
+
+    <audio id="metronome-sound" preload="auto">
+        <source src="sounds/metronome.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="main.js"></script>
 </body>

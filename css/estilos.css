@@ -4,11 +4,6 @@
   --azul_escuro: hsl(236, 100%, 24%);
   --branca: #ffffff;
   --luz: #8484fc;
-  
-  --bg-dark: #1a1a1a;
-  --text-dark: #ffffff;
-  --button-dark: #333333;
-  --accent-dark: #6366f1;
 }
 
 body {
@@ -20,55 +15,313 @@ body {
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
   transition: all 0.3s ease;
+  padding-top: 80px; /* Espaço para o header fixo */
 }
 
-body.dark-theme {
-  background: linear-gradient(45deg, #2d2d2d 0%, #1a1a1a 100%);
-  color: var(--text-dark);
+/* TEMA PADRÃO ESCURO - Preto e azul com nomes brancos */
+body.dark-mode {
+  background: linear-gradient(45deg, #000000 0%, #1a1a3a 100%);
+  color: white;
 }
 
-/* Controls header */
+body.dark-mode .tecla {
+  background-color: var(--azul);
+  color: var(--branca);
+  border: 2px solid var(--branca);
+  box-shadow: 3px 3px 0 var(--azul_escuro);
+}
+
+body.dark-mode .teclado {
+  background: linear-gradient(to bottom, #333333 0%, #111111 100%);
+  box-shadow: 6px 8px 0 6px #000, 10px 10px 10px #000;
+}
+
+body.dark-mode .control-btn,
+body.dark-mode .theme-btn,
+body.dark-mode .game-btn {
+  background: rgba(17, 0, 255, 0.8);
+  color: white;
+  border: 1px solid white;
+}
+
+body.dark-mode .theme-panel,
+body.dark-mode .game-panel,
+body.dark-mode .bpm-controls,
+body.dark-mode .sequencer-panel,
+body.dark-mode .master-controls {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #333;
+  color: white;
+}
+
+/* TEMA NEON CLARO - Cores neon vibrantes em fundo claro */
+body.theme-neon {
+  background: linear-gradient(45deg, #f0f0ff 0%, #e0e0ff 100%);
+  color: #ff006b;
+}
+
+body.theme-neon .tecla {
+  background: #ffffff;
+  color: #ff006b;
+  border: 3px solid #00ffff;
+  box-shadow: 0 0 15px #00ffff, 3px 3px 0 #ff006b;
+  text-shadow: 0 0 5px #ff006b;
+}
+
+body.theme-neon .tecla:hover,
+body.theme-neon .tecla.simon-highlight,
+body.theme-neon .tecla.ativa {
+  background: #00ffff;
+  color: #ff006b;
+  box-shadow: 0 0 25px #ff006b, 3px 3px 0 #ff006b inset;
+  border-color: #ff006b;
+}
+
+body.theme-neon .teclado {
+  background: linear-gradient(to bottom, #ffffff 0%, #f0f0ff 100%);
+  box-shadow: 0 0 20px #00ffff, 6px 8px 0 6px #ff006b;
+}
+
+body.theme-neon .control-btn,
+body.theme-neon .theme-btn,
+body.theme-neon .game-btn {
+  background: #00ffff;
+  color: #ff006b;
+  border: 2px solid #ff006b;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* TEMA NEON ESCURO - Mantém o visual atual (perfeito) */
+body.theme-neon.dark-mode {
+  background: linear-gradient(45deg, #0a0a0a 0%, #1a1a2e 100%);
+  color: #00ffff;
+}
+
+body.theme-neon.dark-mode .tecla {
+  background: #000;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 20px #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+body.theme-neon.dark-mode .tecla:hover,
+body.theme-neon.dark-mode .tecla.simon-highlight,
+body.theme-neon.dark-mode .tecla.ativa {
+  box-shadow: 0 0 30px #00ffff;
+  border-color: #00ffff;
+  color: #00ffff;
+}
+
+/* Tema Retro - mantém como está */
+body.theme-retro {
+  background: linear-gradient(45deg, #8B4513 0%, #DEB887 100%);
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro .tecla {
+  background: #D2B48C;
+  color: #8B4513;
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode {
+  background: linear-gradient(45deg, #4a2c0a 0%, #6b4423 100%);
+}
+
+/* TEMA MINIMAL CLARO - Bordas pretas em tudo quando fundo branco */
+body.theme-minimal {
+  background: #f5f5f5;
+  color: #333;
+}
+
+body.theme-minimal .tecla {
+  background: white;
+  color: #333;
+  border: 2px solid #000000; 
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+body.theme-minimal .teclado {
+  background: white;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+}
+
+body.theme-minimal .control-btn,
+body.theme-minimal .theme-btn,
+body.theme-minimal .game-btn {
+  background: white;
+  color: #333;
+  border: 2px solid #000000;
+}
+
+body.theme-minimal .theme-panel,
+body.theme-minimal .game-panel,
+body.theme-minimal .bpm-controls,
+body.theme-minimal .sequencer-panel,
+body.theme-minimal .master-controls {
+  background: white;
+  border: 2px solid #000000;
+  color: #333;
+}
+
+body.theme-minimal.dark-mode {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+body.theme-minimal.dark-mode .tecla {
+  background: #404040;
+  color: #fff;
+  border: 2px solid #666;
+}
+
+body.theme-minimal.dark-mode .control-btn,
+body.theme-minimal.dark-mode .theme-btn,
+body.theme-minimal.dark-mode .game-btn {
+  background: #404040;
+  color: #fff;
+  border: 2px solid #666;
+}
+
 .controls {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 10px;
   z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .control-btn {
   background: rgba(255, 255, 255, 0.9);
-  border: none;
+  border: 2px solid #333;
   padding: 10px 15px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: bold;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  color: #333;
 }
 
 .control-btn:hover {
   background: rgba(255, 255, 255, 1);
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.dark-theme .control-btn {
-  background: rgba(51, 51, 51, 0.9);
-  color: var(--text-dark);
+/* Estilos para os controles em temas escuros */
+body.dark-mode .controls {
+  background: rgba(17, 0, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Keyboard info */
-.keyboard-info {
-  margin-bottom: 15px;
+body.dark-mode .control-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Tema neon controles */
+body.theme-neon .controls {
+  background: rgba(0, 255, 255, 0.2);
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+body.theme-neon .control-btn {
+  background: #00ffff;
+  color: #ff006b;
+  border: 2px solid #ff006b;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+body.theme-neon.dark-mode .controls {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+body.theme-neon.dark-mode .control-btn {
+  background: rgba(0, 0, 0, 0.8);
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+/* Tema minimal controles */
+body.theme-minimal .controls {
+  background: white;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+}
+
+body.theme-minimal .control-btn {
+  background: white;
+  color: #333;
+  border: 2px solid #000000;
+}
+
+.top-panels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.theme-panel, .game-panel, .bpm-controls, .sequencer-panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 15px;
+  min-width: 200px;
   text-align: center;
-  color: var(--branca);
-  font-size: 14px;
-  opacity: 0.8;
 }
 
-.dark-theme .keyboard-info {
-  color: var(--text-dark);
+.theme-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.theme-btn, .game-btn {
+  padding: 8px 12px;
+  margin: 2px;
+  border: 2px solid;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.theme-btn:hover, .game-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 h1 {
@@ -77,45 +330,94 @@ h1 {
   font-size: 2rem;
 }
 
+.keyboard-info {
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--branca);
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* PAINEL COM 5 BOTÕES POR LINHA */
 .teclado {
   background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
   box-shadow: 6px 8px 0 6px #666, 10px 10px 10px #000;
   border-radius: 30px;
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px 0;
 }
 
 .tecla {
   background-color: var(--branca);
-  border-radius: 30px;
+  border-radius: 20px;
   box-shadow: 3px 3px 0 var(--black);
   color: var(--azul);
   cursor: pointer;
-  height: 120px;
-  font-size: 1.75em;
+  height: 100px;
+  font-size: 1.2em;
   font-weight: bold;
-  line-height: 120px;
+  line-height: 100px;
   text-align: center;
   width: 120px;
   position: relative;
-  transition: all 0.1s ease;
-}
-
-.dark-theme .tecla {
-  background-color: var(--button-dark);
-  color: var(--accent-dark);
-  box-shadow: 3px 3px 0 #111;
+  transition: all 0.2s ease;
+  border: 2px solid var(--black);
 }
 
 .key-hint {
   position: absolute;
   top: 5px;
   right: 8px;
-  font-size: 12px;
+  font-size: 10px;
   opacity: 0.6;
   font-weight: normal;
+}
+
+.tecla.ativa,
+.tecla:active,
+.tecla.simon-highlight {
+  background-color: var(--azul);
+  border: 4px solid var(--azul);
+  box-shadow: 3px 3px 0 var(--azul_escuro) inset;
+  color: var(--branca);
+  outline: none;
+  transform: scale(0.95);
+}
+
+/* Master Controls */
+.master-controls {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 15px;
+  margin: 20px 0;
+  text-align: center;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.master-controls label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  color: inherit;
+}
+
+.master-controls input[type="range"] {
+  width: 150px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
 }
 
 /* Modal styles */
@@ -133,16 +435,11 @@ h1 {
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
+  padding: 30px;
   border-radius: 15px;
   width: 80%;
   max-width: 500px;
   text-align: center;
-}
-
-.dark-theme .modal-content {
-  background-color: var(--button-dark);
-  color: var(--text-dark);
 }
 
 .close {
@@ -157,80 +454,70 @@ h1 {
   color: black;
 }
 
-.record-control {
-  margin: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: var(--azul);
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.record-control:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-#sound-name {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 200px;
-}
-
-.dark-theme #sound-name {
-  background: #555;
-  border-color: #777;
-  color: white;
-}
-
-.tecla.ativa,
-.tecla:active {
-  background-color: var(--azul);
-  border: 4px solid  var(--azul);
-  box-shadow: 3px 3px 0 var(--azul_escuro) inset;
-  color: var(--branca);
-  outline: none;
-}
-
-.tecla.focus,
-.tecla:focus {
-  outline: none;
-  box-shadow: 1px 1px 10px var(--luz);
-}
-
-.tecla.active:focus,
-.tecla:active:focus {
-  box-shadow: 3px 3px 0 var(--azul_escuro) inset, 1px 1px 10px var(--luz);
-}
-
-
+/* Responsive design */
 @media (max-width: 768px) {
   .controls {
-    position: relative;
-    top: 0;
-    right: 0;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    left: 10px;
     justify-content: center;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px;
+    z-index: 1001;
   }
   
   .control-btn {
+    padding: 8px 10px;
     font-size: 12px;
-    padding: 8px 12px;
+    border-radius: 15px;
+  }
+  
+  .top-panels {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px; /* Espaço para os controles fixos */
+  }
+  
+  .theme-panel, .game-panel, .bpm-controls, .sequencer-panel {
+    width: 90%;
+    min-width: auto;
   }
   
   .teclado {
-    gap: 5px;
-    padding: 5px;
+    grid-template-columns: repeat(3, 1fr); /* 3 botões por linha no mobile */
+    gap: 8px;
+    padding: 15px;
   }
   
   .tecla {
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    font-size: 1.5em;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 1em;
+  }
+  
+  .master-controls {
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 0;
+  }
+  
+  .master-controls label {
+    flex-direction: row;
+    gap: 10px;
+    font-size: 14px;
+  }
+  
+  .master-controls input[type="range"] {
+    width: 120px;
+    height: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .teclado {
+    grid-template-columns: repeat(2, 1fr); /* 2 botões por linha em telas muito pequenas */
   }
 }

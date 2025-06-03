@@ -1,0 +1,201 @@
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.equalizer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 60px;
+    margin: 20px 0;
+    gap: 3px;
+}
+
+.eq-bar {
+    width: 8px;
+    background: linear-gradient(to top, #ff0066, #00ffff);
+    border-radius: 3px 3px 0 0;
+    transition: height 0.1s ease;
+    animation: eq-pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes eq-pulse {
+    0% { height: 10px; }
+    100% { height: 50px; }
+}
+
+.theme-neon {
+    background: linear-gradient(45deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #00ffff;
+}
+
+.theme-neon .tecla {
+    background: #000;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.theme-neon .tecla:hover {
+    box-shadow: 0 0 30px #ff0066;
+    border-color: #ff0066;
+    color: #ff0066;
+}
+
+.theme-retro {
+    background: linear-gradient(45deg, #8B4513 0%, #DEB887 100%);
+    font-family: 'Courier New', monospace;
+}
+
+.theme-retro .tecla {
+    background: #D2B48C;
+    color: #8B4513;
+    border: 3px outset #D2B48C;
+    border-radius: 0;
+    font-family: 'Courier New', monospace;
+}
+
+.theme-minimal {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.theme-minimal .tecla {
+    background: white;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.bpm-controls, .sequencer-panel, .master-controls {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+.button-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.button-container:hover .button-controls {
+    opacity: 1;
+}
+
+.volume-slider, .pitch-slider {
+    width: 80px;
+    height: 5px;
+}
+
+.click-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 15px;
+    text-align: center;
+}
+
+.game-section, .stats-section, .theme-panel {
+    position: fixed;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    min-width: 200px;
+}
+
+.game-section { top: 120px; }
+.stats-section { top: 280px; }
+.theme-panel { top: 440px; }
+
+.game-btn, .theme-btn {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.game-btn:hover, .theme-btn:hover {
+    background: #555;
+}
+
+.achievement-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #333;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: achievement-appear 3s ease-in-out;
+    z-index: 10000;
+}
+
+@keyframes achievement-appear {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+body:fullscreen {
+    background: black;
+}
+
+body:fullscreen .controls {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+    .game-section, .stats-section, .theme-panel {
+        position: relative;
+        right: auto;
+        margin: 10px auto;
+        width: 90%;
+    }
+    
+    .bpm-controls, .sequencer-panel, .master-controls {
+        margin: 5px;
+        padding: 10px;
+    }
+    
+    .equalizer {
+        height: 40px;
+    }
+}
