@@ -34,7 +34,7 @@
                 <button class="theme-btn" data-theme="minimal">Minimalista</button>
             </div>
         </div>
-
+        
         <div class="game-panel">
             <h3>🎮 Jogos</h3>
             <button id="simon-btn" class="game-btn">Simon Says</button>
@@ -44,9 +44,10 @@
         </div>
 
         <div class="bpm-controls">
-            <h3>🥁 Ritmo</h3>
+            <h3>🥁 Ritmo (BPM)</h3>
+            <p style="font-size: 10px; margin: 5px 0;">BPM = Batidas Por Minuto - Controla a velocidade do metrônomo para manter o ritmo</p>
             <label>BPM: <input type="range" id="bpm-slider" min="60" max="200" value="120"></label>
-            <span id="bpm-display">120</span>
+            <span id="bpm-display">120 BPM</span>
             <button id="metronome-toggle">🥁 Metrônomo</button>
         </div>
 
@@ -60,9 +61,10 @@
     </div>
 
     <h1>DJ JPZINNN</h1>
-
+    
     <div class="keyboard-info">
         <p>Use as teclas: Q, W, E, A, S, D, Z, X, C, R, T, Y, F, G, H</p>
+        <p><strong>P</strong> = Parar todos os sons</p>
     </div>
 
     <section class="teclado">
@@ -81,7 +83,6 @@
         <button class="tecla tecla_Chavin" data-key="s" data-sound="Chavin">
             Chavin<span class="key-hint">S</span>
         </button>
-
         <button class="tecla tecla_Morango" data-key="d" data-sound="Morango">
             Morango<span class="key-hint">D</span>
         </button>
@@ -94,30 +95,78 @@
         <button class="tecla tecla_Grosso" data-key="c" data-sound="Grosso">
             Grosso<span class="key-hint">C</span>
         </button>
-        <button class="tecla tecla_Cavalo" data-key="r" data-sound="Cavalo">
-            Cavalo<span class="key-hint">R</span>
+        <button class="tecla tecla_Jojo" data-key="r" data-sound="Jojo">
+            Jojo<span class="key-hint">R</span>
         </button>
-
-        <button class="tecla tecla_Otario" data-key="t" data-sound="Otario">
-            Otário<span class="key-hint">T</span>
+        <button class="tecla tecla_Qi" data-key="t" data-sound="Qi">
+            Qi<span class="key-hint">T</span>
         </button>
-        <button class="tecla tecla_Uepa" data-key="y" data-sound="Uepa">
-            Uepa<span class="key-hint">Y</span>
+        <button class="tecla tecla_Ruby" data-key="y" data-sound="Ruby">
+            Ruby<span class="key-hint">Y</span>
         </button>
-        <button class="tecla tecla_Ronaldinho" data-key="f" data-sound="Ronaldinho">
-            Ronaldinho<span class="key-hint">F</span>
+        <button class="tecla tecla_Sai" data-key="f" data-sound="Sai">
+            Sai<span class="key-hint">F</span>
         </button>
-        <button class="tecla tecla_Ovo" data-key="g" data-sound="Ovo">
-            Ovo<span class="key-hint">G</span>
+        <button class="tecla tecla_Titan" data-key="g" data-sound="Titan">
+            Titan<span class="key-hint">G</span>
         </button>
-        <button class="tecla tecla_Vinhetada" data-key="h" data-sound="Vinhetada">
-            Vinhetada<span class="key-hint">H</span>
+        <button class="tecla tecla_Nayn" data-key="h" data-sound="Nayn">
+            Nayn<span class="key-hint">H</span>
         </button>
-    </section>
-
-    <div class="master-controls">
+    </section>    <div class="master-controls">
         <label>Volume Master: <input type="range" id="master-volume" min="0" max="100" value="100"></label>
+        <span id="master-volume-display">100%</span>
         <label>Pitch Global: <input type="range" id="master-pitch" min="0.5" max="2" step="0.1" value="1"></label>
+        <span id="master-pitch-display">1.0x</span>
+    </div>
+
+    <div class="effects-panel">
+        <h3>🎛️ Preset de Efeitos</h3>
+        <div class="effects-controls">
+            <div class="effect-group">
+                <label>
+                    <input type="checkbox" id="reverb-effect" class="effect-toggle">
+                    🏰 Reverb
+                </label>
+                <input type="range" id="reverb-amount" min="0" max="100" value="30" class="effect-slider">
+            </div>
+            <div class="effect-group">
+                <label>
+                    <input type="checkbox" id="delay-effect" class="effect-toggle">
+                    ⏰ Delay
+                </label>
+                <input type="range" id="delay-amount" min="0" max="100" value="25" class="effect-slider">
+            </div>
+            <div class="effect-group">
+                <label>
+                    <input type="checkbox" id="distortion-effect" class="effect-toggle">
+                    🔥 Distorção
+                </label>
+                <input type="range" id="distortion-amount" min="0" max="100" value="20" class="effect-slider">
+            </div>
+            <div class="effect-presets">
+                <button class="preset-btn" data-preset="clean">🎵 Limpo</button>
+                <button class="preset-btn" data-preset="club">🏃 Club</button>
+                <button class="preset-btn" data-preset="ambient">🌌 Ambiente</button>
+                <button class="preset-btn" data-preset="rock">🎸 Rock</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-panel">
+        <div class="feature-group">
+            <h4>📤 Exportação</h4>
+            <button id="export-audio" class="feature-btn">💾 Exportar Áudio</button>
+            <select id="export-format">
+                <option value="mp3">MP3</option>
+                <option value="wav">WAV</option>
+            </select>
+        </div>
+        <div class="feature-group">
+            <h4>⭐ Favoritos</h4>
+            <button id="show-favorites" class="feature-btn">❤️ Ver Favoritos</button>
+            <div id="favorites-list" style="display: none;"></div>
+        </div>
     </div>
 
     <div id="simon-modal" class="modal">
@@ -144,24 +193,124 @@
         </div>
     </div>
 
-    <audio src="sounds/jack.mp3" id="som_tecla_Jack"></audio>
-    <audio src="sounds/tome.mp3" id="som_tecla_Tome"></audio>
-    <audio src="sounds/dom.mp3" id="som_tecla_Dom"></audio>
-    <audio src="sounds/oruan.mp3" id="som_tecla_Oruan"></audio>
-    <audio src="sounds/chavin.mp3" id="som_tecla_Chavin"></audio>
-    <audio src="sounds/morango.mp3" id="som_tecla_Morango"></audio>
-    <audio src="sounds/cebolinha.mp3" id="som_tecla_Cebolinha"></audio>
-    <audio src="sounds/tung.mp3" id="som_tecla_Tung"></audio>
-    <audio src="sounds/Grosso.mp3" id="som_tecla_Grosso"></audio>
-    <audio src="sounds/cavalo.mp3" id="som_tecla_Cavalo"></audio>
-    <audio src="sounds/otario.mp3" id="som_tecla_Otario"></audio>
-    <audio src="sounds/uepa.mp3" id="som_tecla_Uepa"></audio>
-    <audio src="sounds/ronaldinho.mp3" id="som_tecla_Ronaldinho"></audio>
-    <audio src="sounds/ovo.mp3" id="som_tecla_Ovo"></audio>
-    <audio src="sounds/vinhetada.mp3" id="som_tecla_Vinhetada"></audio>
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <span class="close export-close">&times;</span>
+            <h2>📤 Exportar Áudio</h2>
+            <div class="export-options">
+                <div class="export-group">
+                    <label>Formato:</label>
+                    <select id="export-format-select">
+                        <option value="mp3">MP3 (Comprimido)</option>
+                        <option value="wav">WAV (Alta Qualidade)</option>
+                    </select>
+                </div>
+                <div class="export-group">
+                    <label>Qualidade:</label>
+                    <select id="export-quality">
+                        <option value="128">128 kbps</option>
+                        <option value="192">192 kbps</option>
+                        <option value="320" selected>320 kbps</option>
+                    </select>
+                </div>
+                <div class="export-group">
+                    <label>Nome do arquivo:</label>
+                    <input type="text" id="export-filename" placeholder="minha_mixagem" />
+                </div>
+                <div class="export-actions">
+                    <button id="start-export" class="export-btn">🎵 Exportar Mix Atual</button>
+                    <button id="record-export" class="export-btn">🔴 Gravar e Exportar</button>
+                </div>
+                <div id="export-status" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="favorites-modal" class="modal">
+        <div class="modal-content">
+            <span class="close favorites-close">&times;</span>
+            <h2>⭐ Sistema de Favoritos</h2>
+            <div class="favorites-content">
+                <div class="favorites-sounds">
+                    <h3>Sons Favoritos</h3>
+                    <div id="favorite-sounds-list"></div>
+                </div>
+                <div class="favorites-presets">
+                    <h3>Presets Favoritos</h3>
+                    <div id="favorite-presets-list"></div>
+                    <div class="preset-actions">
+                        <input type="text" id="new-preset-name" placeholder="Nome do preset">
+                        <button id="save-current-preset">💾 Salvar Preset Atual</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio preload="auto" id="som_tecla_Jack" data-key="q">
+        <source src="sounds/jack.mp3" type="audio/mpeg">
+        <source src="sounds/jack.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Tome" data-key="w">
+        <source src="sounds/tome.mp3" type="audio/mpeg">
+        <source src="sounds/tome.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Dom" data-key="e">
+        <source src="sounds/dom.mp3" type="audio/mpeg">
+        <source src="sounds/dom.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Oruan" data-key="a">
+        <source src="sounds/oruan.mp3" type="audio/mpeg">
+        <source src="sounds/oruan.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Chavin" data-key="s">
+        <source src="sounds/chavin.mp3" type="audio/mpeg">
+        <source src="sounds/chavin.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Morango" data-key="d">
+        <source src="sounds/morango.mp3" type="audio/mpeg">
+        <source src="sounds/morango.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Cebolinha" data-key="z">
+        <source src="sounds/cebolinha.mp3" type="audio/mpeg">
+        <source src="sounds/cebolinha.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Tung" data-key="x">
+        <source src="sounds/tung.mp3" type="audio/mpeg">
+        <source src="sounds/tung.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Grosso" data-key="c">
+        <source src="sounds/grosso.mp3" type="audio/mpeg">
+        <source src="sounds/grosso.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Jojo" data-key="r">
+        <source src="sounds/jojo.mp3" type="audio/mpeg">
+        <source src="sounds/jojo.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Qi" data-key="t">
+        <source src="sounds/qi.mp3" type="audio/mpeg">
+        <source src="sounds/qi.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Ruby" data-key="y">
+        <source src="sounds/ruby.mp3" type="audio/mpeg">
+        <source src="sounds/ruby.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Sai" data-key="f">
+        <source src="sounds/sai.mp3" type="audio/mpeg">
+        <source src="sounds/sai.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Titan" data-key="g">
+        <source src="sounds/titan.mp3" type="audio/mpeg">
+        <source src="sounds/titan.wav" type="audio/wav">
+    </audio>
+    <audio preload="auto" id="som_tecla_Nayn" data-key="h">
+        <source src="sounds/nayn.mp3" type="audio/mpeg">
+        <source src="sounds/nayn.wav" type="audio/wav">
+    </audio>
 
     <audio id="metronome-sound" preload="auto">
         <source src="sounds/metronome.mp3" type="audio/mpeg">
+        <source src="sounds/metronome.wav" type="audio/wav">
     </audio>
 
     <script src="main.js"></script>

@@ -16,9 +16,94 @@ body {
   min-height: 100vh;
   transition: all 0.3s ease;
   padding-top: 80px; /* Espaço para o header fixo */
+  color: #333;
 }
 
-/* TEMA PADRÃO ESCURO - Preto e azul com nomes brancos */
+/* ===== ESTILOS BASE PARA ELEMENTOS PRINCIPAIS ===== */
+h1 {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+  background: linear-gradient(45deg, var(--azul), var(--luz));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+.keyboard-info {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: var(--azul_escuro);
+  font-weight: 600;
+}
+
+/* ===== ESTILOS BASE PARA TECLAS (TEMA PADRÃO CLARO) ===== */
+.tecla {
+  background: linear-gradient(45deg, var(--azul), var(--luz));
+  color: var(--branca);
+  border: 2px solid var(--azul_escuro);
+  box-shadow: 3px 3px 0 var(--azul_escuro), 0 0 10px rgba(17, 0, 255, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  outline: none;
+  user-select: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.tecla:hover {
+  background: linear-gradient(45deg, var(--luz), #a9a9ff) !important;
+  color: var(--branca) !important;
+  box-shadow: 0 0 20px var(--luz), 3px 3px 0 var(--azul_escuro) !important;
+  border-color: var(--luz) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7) !important;
+}
+
+.tecla:active,
+.tecla.ativa {
+  background: var(--azul_escuro) !important;
+  color: var(--branca) !important;
+  box-shadow: 1px 1px 0 var(--azul), inset 2px 2px 5px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(1px) scale(0.98) !important;
+}
+
+.key-hint {
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+  font-size: 0.7em;
+  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: normal;
+}
+
+.teclado {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  padding: 30px;
+  background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 100%);
+  border-radius: 20px;
+  box-shadow: 6px 8px 0 6px var(--azul_escuro), 10px 10px 20px rgba(0, 0, 0, 0.3);
+  margin: 20px 0;
+  max-width: 800px;
+}
+
+/* ===== TEMA PADRÃO ESCURO - Preto e azul com nomes brancos ===== */
 body.dark-mode {
   background: linear-gradient(45deg, #000000 0%, #1a1a3a 100%);
   color: white;
@@ -31,6 +116,15 @@ body.dark-mode .tecla {
   box-shadow: 3px 3px 0 var(--azul_escuro);
 }
 
+/* Hover para tema padrão escuro */
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .tecla:hover {
+  background-color: var(--luz) !important;
+  color: var(--branca) !important;
+  box-shadow: 0 0 20px var(--luz), 3px 3px 0 var(--azul_escuro) !important;
+  border-color: var(--luz) !important;
+  transform: translateY(-2px) !important;
+}
+
 body.dark-mode .teclado {
   background: linear-gradient(to bottom, #333333 0%, #111111 100%);
   box-shadow: 6px 8px 0 6px #000, 10px 10px 10px #000;
@@ -39,7 +133,7 @@ body.dark-mode .teclado {
 body.dark-mode .control-btn,
 body.dark-mode .theme-btn,
 body.dark-mode .game-btn {
-  background: rgba(17, 0, 255, 0.8);
+  background: rgba(0, 123, 255, 0.8);
   color: white;
   border: 1px solid white;
 }
@@ -56,44 +150,87 @@ body.dark-mode .master-controls {
 
 /* TEMA NEON CLARO - Cores neon vibrantes em fundo claro */
 body.theme-neon {
-  background: linear-gradient(45deg, #f0f0ff 0%, #e0e0ff 100%);
+  background: linear-gradient(45deg, #ffb3d9 0%, #ffe6f2 50%, #fff5f9 100%);
+  color: #ff006b;
+}
+
+body.theme-neon h1,
+body.theme-neon .keyboard-info {
   color: #ff006b;
 }
 
 body.theme-neon .tecla {
-  background: #ffffff;
-  color: #ff006b;
-  border: 3px solid #00ffff;
-  box-shadow: 0 0 15px #00ffff, 3px 3px 0 #ff006b;
-  text-shadow: 0 0 5px #ff006b;
+  background: #ff006b;
+  color: #ffffff;
+  border: 3px solid #ff006b;
+  box-shadow: 0 0 15px #ff006b, 3px 3px 0 #ff006b;
+  text-shadow: 0 0 5px #ffffff;
+}
+
+/* Hover para tema neon claro */
+body.theme-neon:not(.dark-mode) .tecla:hover {
+  background: #ff0080 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 25px #ff006b, 0 0 35px #ff006b, 3px 3px 0 #ff006b !important;
+  border-color: #ff006b !important;
+  transform: translateY(-2px) scale(1.05) !important;
+  text-shadow: 0 0 10px #ffffff !important;
+}
+
+/* Hover para tema neon escuro */
+body.theme-neon.dark-mode .tecla:hover {
+  background: #001a1a !important;
+  color: #00ffff !important;
+  box-shadow: 0 0 30px #00ffff, 0 0 40px #00ffff !important;
+  border-color: #00ffff !important;
+  transform: translateY(-2px) scale(1.05) !important;
+  text-shadow: 0 0 15px #00ffff !important;
 }
 
 body.theme-neon .tecla:hover,
 body.theme-neon .tecla.simon-highlight,
-body.theme-neon .tecla.ativa {
-  background: #00ffff;
-  color: #ff006b;
-  box-shadow: 0 0 25px #ff006b, 3px 3px 0 #ff006b inset;
-  border-color: #ff006b;
+body.theme-neon .tecla.ativa,
+body.theme-neon .tecla:active {
+  background: #ff0080 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 25px #ff006b, 3px 3px 0 #ff006b inset !important;
+  border-color: #ff006b !important;
+  transform: scale(0.95) !important;
 }
 
 body.theme-neon .teclado {
-  background: linear-gradient(to bottom, #ffffff 0%, #f0f0ff 100%);
-  box-shadow: 0 0 20px #00ffff, 6px 8px 0 6px #ff006b;
+  background: linear-gradient(to bottom, #fff5f9 0%, #ffe8f1 100%);
+  box-shadow: 0 0 20px rgba(255, 0, 107, 0.3), 6px 8px 0 6px #ff006b;
 }
 
 body.theme-neon .control-btn,
 body.theme-neon .theme-btn,
 body.theme-neon .game-btn {
-  background: #00ffff;
+  background: rgba(255, 255, 255, 0.9);
   color: #ff006b;
   border: 2px solid #ff006b;
-  box-shadow: 0 0 10px #00ffff;
+  box-shadow: 0 0 10px rgba(255, 0, 107, 0.3);
+}
+
+body.theme-neon .theme-panel,
+body.theme-neon .game-panel,
+body.theme-neon .bpm-controls,
+body.theme-neon .sequencer-panel,
+body.theme-neon .master-controls {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #ff006b;
+  color: #ff006b;
+  box-shadow: 0 0 15px rgba(255, 0, 107, 0.3);
 }
 
 /* TEMA NEON ESCURO - Mantém o visual atual (perfeito) */
 body.theme-neon.dark-mode {
   background: linear-gradient(45deg, #0a0a0a 0%, #1a1a2e 100%);
+  color: #00ffff;
+}
+
+body.theme-neon.dark-mode h1,
+body.theme-neon.dark-mode .keyboard-info {
   color: #00ffff;
 }
 
@@ -113,6 +250,35 @@ body.theme-neon.dark-mode .tecla.ativa {
   color: #00ffff;
 }
 
+body.theme-neon.dark-mode .teclado {
+  background: linear-gradient(to bottom, #000000 0%, #111111 100%);
+  box-shadow: 0 0 20px #00ffff, 6px 8px 0 6px #00ffff;
+}
+
+body.theme-neon.dark-mode .theme-panel,
+body.theme-neon.dark-mode .game-panel,
+body.theme-neon.dark-mode .bpm-controls,
+body.theme-neon.dark-mode .sequencer-panel,
+body.theme-neon.dark-mode .master-controls {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+body.theme-neon.dark-mode .theme-panel h3,
+body.theme-neon.dark-mode .game-panel h3 {
+  color: #00ffff;
+}
+
+body.theme-neon.dark-mode .theme-btn,
+body.theme-neon.dark-mode .game-btn {
+  background: rgba(0, 0, 0, 0.8);
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 15px #00ffff;
+}
+
 /* Tema Retro - mantém como está */
 body.theme-retro {
   background: linear-gradient(45deg, #8B4513 0%, #DEB887 100%);
@@ -127,8 +293,81 @@ body.theme-retro .tecla {
   font-family: 'Courier New', monospace;
 }
 
+/* Hover para tema retro claro */
+body.theme-retro:not(.dark-mode) .tecla:hover {
+  background: #C7A572 !important;
+  color: #8B4513 !important;
+  border: 3px outset #C7A572 !important;
+  box-shadow: 2px 2px 0 #8B4513, 4px 4px 8px rgba(139, 69, 19, 0.3) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+/* Hover para tema retro escuro */
+body.theme-retro.dark-mode .tecla:hover {
+  background: #444444 !important;
+  color: #ffffff !important;
+  border: 3px outset #444444 !important;
+  box-shadow: 2px 2px 0 #222222, 4px 4px 8px rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+body.theme-retro .tecla:hover,
+body.theme-retro .tecla.simon-highlight,
+body.theme-retro .tecla.ativa,
+body.theme-retro .tecla:active {
+  background: #B8860B !important;
+  color: #654321 !important;
+  border: 3px inset #D2B48C !important;
+  box-shadow: 2px 2px 0 #A0522D inset !important;
+  transform: scale(0.95) !important;
+}
+
 body.theme-retro.dark-mode {
   background: linear-gradient(45deg, #4a2c0a 0%, #6b4423 100%);
+}
+
+body.theme-retro.dark-mode .tecla {
+  background: #333333;
+  color: #ffffff;
+  border: 3px outset #333333;
+}
+
+/* Sobrescrever bordas ativas para tema retro escuro */
+body.theme-retro.dark-mode .tecla.ativa,
+body.theme-retro.dark-mode .tecla:active,
+body.theme-retro.dark-mode .tecla.simon-highlight {
+  background: #555555 !important;
+  border: 3px inset #333333 !important;
+  box-shadow: 2px 2px 0 #222222 inset !important;
+  color: #ffffff !important;
+}
+
+body.theme-retro.dark-mode .teclado {
+  background: linear-gradient(to bottom, #666666 0%, #555555 100%);
+  box-shadow: 6px 8px 0 6px #333, 10px 10px 10px #000;
+}
+
+body.theme-retro.dark-mode .theme-panel,
+body.theme-retro.dark-mode .game-panel,
+body.theme-retro.dark-mode .bpm-controls,
+body.theme-retro.dark-mode .sequencer-panel,
+body.theme-retro.dark-mode .master-controls {
+  background: #666666;
+  border: 1px solid #333333;
+  color: white;
+}
+
+body.theme-retro.dark-mode .theme-btn,
+body.theme-retro.dark-mode .game-btn {
+  background: #666666;
+  color: white;
+  border: 2px solid white;
+}
+
+body.theme-retro.dark-mode .theme-btn:hover,
+body.theme-retro.dark-mode .game-btn:hover {
+  background: #777777;
+  border: 2px solid white;
 }
 
 /* TEMA MINIMAL CLARO - Bordas pretas em tudo quando fundo branco */
@@ -137,12 +376,37 @@ body.theme-minimal {
   color: #333;
 }
 
+body.theme-minimal h1,
+body.theme-minimal .keyboard-info {
+  color: #000000;
+}
+
 body.theme-minimal .tecla {
-  background: white;
-  color: #333;
+  background: #000000;
+  color: #ffffff;
   border: 2px solid #000000; 
   border-radius: 4px;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Hover para tema minimal claro */
+body.theme-minimal:not(.dark-mode) .tecla:hover {
+  background: #333333 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 2px 2px 4px rgba(0,0,0,0.3) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+body.theme-minimal .tecla:hover,
+body.theme-minimal .tecla.simon-highlight,
+body.theme-minimal .tecla.ativa,
+body.theme-minimal .tecla:active {
+  background: #333333 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.5) inset !important;
+  transform: scale(0.95) !important;
 }
 
 body.theme-minimal .teclado {
@@ -174,10 +438,15 @@ body.theme-minimal.dark-mode {
   color: #fff;
 }
 
+body.theme-minimal.dark-mode h1,
+body.theme-minimal.dark-mode .keyboard-info {
+  color: #ffffff;
+}
+
 body.theme-minimal.dark-mode .tecla {
-  background: #404040;
-  color: #fff;
-  border: 2px solid #666;
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
 }
 
 body.theme-minimal.dark-mode .control-btn,
@@ -188,6 +457,31 @@ body.theme-minimal.dark-mode .game-btn {
   border: 2px solid #666;
 }
 
+body.theme-minimal.dark-mode .theme-panel,
+body.theme-minimal.dark-mode .game-panel,
+body.theme-minimal.dark-mode .bpm-controls,
+body.theme-minimal.dark-mode .sequencer-panel,
+body.theme-minimal.dark-mode .master-controls {
+  background: #404040;
+  border: 2px solid #666666;
+  color: #cccccc;
+}
+
+/* Hover para tema minimal escuro */
+body.theme-minimal.dark-mode .tecla:hover {
+  background: #cccccc !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 2px 2px 4px rgba(0,0,0,0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+body.theme-minimal.dark-mode .teclado {
+  background: linear-gradient(to bottom, #404040 0%, #333333 100%);
+  border: 2px solid #666666;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+}
+
 .controls {
   position: fixed;
   top: 10px;
@@ -196,7 +490,7 @@ body.theme-minimal.dark-mode .game-btn {
   display: flex;
   gap: 10px;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   padding: 10px 20px;
   border-radius: 25px;
@@ -224,33 +518,33 @@ body.theme-minimal.dark-mode .game-btn {
 
 /* Estilos para os controles em temas escuros */
 body.dark-mode .controls {
-  background: rgba(17, 0, 255, 0.9);
+  background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 body.dark-mode .control-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 123, 255, 0.8);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid white;
 }
 
 body.dark-mode .control-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 123, 255, 1);
   transform: translateY(-2px);
 }
 
 /* Tema neon controles */
 body.theme-neon .controls {
-  background: rgba(0, 255, 255, 0.2);
-  border: 2px solid #00ffff;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #ff006b;
+  box-shadow: 0 0 20px rgba(255, 0, 107, 0.3);
 }
 
 body.theme-neon .control-btn {
-  background: #00ffff;
+  background: rgba(255, 255, 255, 0.9);
   color: #ff006b;
   border: 2px solid #ff006b;
-  box-shadow: 0 0 10px #00ffff;
+  box-shadow: 0 0 10px rgba(255, 0, 107, 0.3);
 }
 
 body.theme-neon.dark-mode .controls {
@@ -264,6 +558,22 @@ body.theme-neon.dark-mode .control-btn {
   color: #00ffff;
   border: 2px solid #00ffff;
   box-shadow: 0 0 15px #00ffff;
+}
+
+body.theme-retro.dark-mode .controls {
+  background: rgba(102, 102, 102, 0.9);
+  border: 1px solid white;
+}
+
+body.theme-retro.dark-mode .control-btn {
+  background: #666666;
+  color: white;
+  border: 2px solid white;
+}
+
+body.theme-retro.dark-mode .control-btn:hover {
+  background: #777777;
+  border: 2px solid white;
 }
 
 /* Tema minimal controles */
@@ -289,7 +599,7 @@ body.theme-minimal .control-btn {
   max-width: 1200px;
 }
 
-.theme-panel, .game-panel, .bpm-controls, .sequencer-panel {
+.theme-panel, .game-panel, .bpm-controls, .sequencer-panel, .effects-panel, .favorites-panel, .export-panel {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   padding: 15px;
@@ -298,160 +608,881 @@ body.theme-minimal .control-btn {
   text-align: center;
 }
 
-.theme-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-}
-
-.theme-btn, .game-btn {
-  padding: 8px 12px;
-  margin: 2px;
-  border: 2px solid;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.theme-btn:hover, .game-btn:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-h1 {
-  color: var(--branca);
-  margin-bottom: 20px;
-  font-size: 2rem;
-}
-
-.keyboard-info {
-  margin-bottom: 15px;
-  text-align: center;
-  color: var(--branca);
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-/* PAINEL COM 5 BOTÕES POR LINHA */
-.teclado {
-  background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
-  box-shadow: 6px 8px 0 6px #666, 10px 10px 10px #000;
-  border-radius: 30px;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(5, 1fr);
-  padding: 20px;
-  max-width: 800px;
-  margin: 20px 0;
-}
-
-.tecla {
-  background-color: var(--branca);
-  border-radius: 20px;
-  box-shadow: 3px 3px 0 var(--black);
-  color: var(--azul);
-  cursor: pointer;
-  height: 100px;
-  font-size: 1.2em;
-  font-weight: bold;
-  line-height: 100px;
-  text-align: center;
-  width: 120px;
-  position: relative;
-  transition: all 0.2s ease;
-  border: 2px solid var(--black);
-}
-
-.key-hint {
-  position: absolute;
-  top: 5px;
-  right: 8px;
-  font-size: 10px;
-  opacity: 0.6;
-  font-weight: normal;
-}
-
-.tecla.ativa,
-.tecla:active,
-.tecla.simon-highlight {
-  background-color: var(--azul);
-  border: 4px solid var(--azul);
-  box-shadow: 3px 3px 0 var(--azul_escuro) inset;
-  color: var(--branca);
-  outline: none;
-  transform: scale(0.95);
-}
-
-/* Master Controls */
-.master-controls {
+/* Estilos específicos para os novos painéis */
+.effects-panel {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  padding: 15px;
   border-radius: 15px;
+  padding: 20px;
   margin: 20px 0;
-  text-align: center;
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 600px;
 }
 
-.master-controls label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  font-weight: bold;
+.effects-panel h3 {
+  margin: 0 0 15px 0;
+  text-align: center;
+  font-size: 1.2em;
   color: inherit;
 }
 
-.master-controls input[type="range"] {
-  width: 150px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
+.effects-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-/* Modal styles */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1001;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
+.effect-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }
 
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 30px;
-  border-radius: 15px;
-  width: 80%;
-  max-width: 500px;
-  text-align: center;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
+.effect-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.close:hover {
-  color: black;
+.effect-toggle {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.effect-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+  cursor: pointer;
+}
+
+.effect-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--azul);
+  cursor: pointer;
+}
+
+.effect-presets {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.preset-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(45deg, var(--azul), var(--luz));
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+}
+
+.preset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(17, 0, 255, 0.4);
+}
+
+.preset-btn.active {
+  background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+}
+
+/* ===== PAINEL DE FUNCIONALIDADES ===== */
+.features-panel {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.feature-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.feature-group h4 {
+  margin: 0 0 10px 0;
+  font-size: 1em;
+  color: inherit;
+}
+
+.feature-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, var(--azul), var(--luz));
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.feature-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(17, 0, 255, 0.4);
+}
+
+#export-format {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  margin-top: 5px;
+}
+
+/* ===== MODAIS DE EXPORTAÇÃO E FAVORITOS ===== */
+.export-options, .favorites-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.export-group, .favorites-sounds, .favorites-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.export-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.export-group select, .export-group input {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+}
+
+.export-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.export-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+#export-status {
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ===== FAVORITOS ===== */
+.favorites-content {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.favorites-sounds, .favorites-presets {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.favorite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.favorite-item:last-child {
+  margin-bottom: 0;
+}
+
+.favorite-item button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 3px;
+  background: #dc3545;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.preset-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.preset-actions input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+}
+
+.preset-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(45deg, var(--azul), var(--luz));
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ===== RESPONSIVIDADE PARA NOVOS PAINÉIS ===== */
+@media (max-width: 768px) {
+  .effects-controls {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-panel {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .export-actions {
+    flex-direction: column;
+  }
+  
+  .preset-actions {
+    flex-direction: column;
+  }
+}
+
+/* ===== TEMAS COMPLETOS PARA NOVOS PAINÉIS E MODAIS ===== */
+
+/* ===== TEMA PADRÃO ESCURO ===== */
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .effects-panel,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .features-panel,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .export-modal,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .favorites-modal {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #333;
+  color: white;
+}
+
+/* ===== TEMA PADRÃO ESCURO - BOTÕES DOS PAINÉIS ===== */
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #metronome-toggle,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-record,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-play,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-clear,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #export-audio,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #show-favorites,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .preset-btn,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .feature-btn,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .export-btn,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .record-control,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-recording,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #stop-recording,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-recording,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #simon-start,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-current-preset,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-export,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #record-export {
+  background: rgba(0, 123, 255, 0.8);
+  color: white;
+  border: 1px solid white;
+}
+
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #metronome-toggle:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-record:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-play:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-clear:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #export-audio:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #show-favorites:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .preset-btn:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .feature-btn:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .export-btn:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .record-control:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-recording:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #stop-recording:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-recording:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #simon-start:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-current-preset:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-export:hover,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #record-export:hover {
+  background: rgba(0, 123, 255, 1);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+}
+
+/* ===== TEMA NEON CLARO - BOTÕES DOS PAINÉIS ===== */
+body.theme-neon:not(.dark-mode) #metronome-toggle,
+body.theme-neon:not(.dark-mode) #seq-record,
+body.theme-neon:not(.dark-mode) #seq-play,
+body.theme-neon:not(.dark-mode) #seq-clear,
+body.theme-neon:not(.dark-mode) #export-audio,
+body.theme-neon:not(.dark-mode) #show-favorites,
+body.theme-neon:not(.dark-mode) .preset-btn,
+body.theme-neon:not(.dark-mode) .feature-btn,
+body.theme-neon:not(.dark-mode) .export-btn,
+body.theme-neon:not(.dark-mode) .record-control,
+body.theme-neon:not(.dark-mode) #start-recording,
+body.theme-neon:not(.dark-mode) #stop-recording,
+body.theme-neon:not(.dark-mode) #save-recording,
+body.theme-neon:not(.dark-mode) #simon-start,
+body.theme-neon:not(.dark-mode) #save-current-preset,
+body.theme-neon:not(.dark-mode) #start-export,
+body.theme-neon:not(.dark-mode) #record-export {
+  background: linear-gradient(45deg, #ff006b, #ff0080);
+  color: white;
+  border: 2px solid #ff006b;
+  box-shadow: 0 0 10px rgba(255, 0, 107, 0.3);
+}
+
+body.theme-neon:not(.dark-mode) #metronome-toggle:hover,
+body.theme-neon:not(.dark-mode) #seq-record:hover,
+body.theme-neon:not(.dark-mode) #seq-play:hover,
+body.theme-neon:not(.dark-mode) #seq-clear:hover,
+body.theme-neon:not(.dark-mode) #export-audio:hover,
+body.theme-neon:not(.dark-mode) #show-favorites:hover,
+body.theme-neon:not(.dark-mode) .preset-btn:hover,
+body.theme-neon:not(.dark-mode) .feature-btn:hover,
+body.theme-neon:not(.dark-mode) .export-btn:hover,
+body.theme-neon:not(.dark-mode) .record-control:hover,
+body.theme-neon:not(.dark-mode) #start-recording:hover,
+body.theme-neon:not(.dark-mode) #stop-recording:hover,
+body.theme-neon:not(.dark-mode) #save-recording:hover,
+body.theme-neon:not(.dark-mode) #simon-start:hover,
+body.theme-neon:not(.dark-mode) #save-current-preset:hover,
+body.theme-neon:not(.dark-mode) #start-export:hover,
+body.theme-neon:not(.dark-mode) #record-export:hover {
+  background: linear-gradient(45deg, #ff0080, #ff33a0);
+  box-shadow: 0 0 20px rgba(255, 0, 107, 0.5);
+}
+
+body.theme-neon:not(.dark-mode) .effects-panel,
+body.theme-neon:not(.dark-mode) .features-panel,
+body.theme-neon:not(.dark-mode) .export-modal,
+body.theme-neon:not(.dark-mode) .favorites-modal {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #ff006b;
+  color: #ff006b;
+  box-shadow: 0 0 15px rgba(255, 0, 107, 0.3);
+}
+
+body.theme-neon:not(.dark-mode) .effect-group {
+  background: rgba(255, 0, 107, 0.1);
+}
+
+body.theme-neon:not(.dark-mode) .effect-slider::-webkit-slider-thumb {
+  background: #ff006b;
+}
+
+body.theme-neon:not(.dark-mode) .preset-btn,
+body.theme-neon:not(.dark-mode) .feature-btn,
+body.theme-neon:not(.dark-mode) .export-btn {
+  background: linear-gradient(45deg, #ff006b, #ff0080);
+  color: white;
+  border: 2px solid #ff006b;
+  box-shadow: 0 0 10px rgba(255, 0, 107, 0.3);
+}
+
+body.theme-neon:not(.dark-mode) .preset-btn:hover,
+body.theme-neon:not(.dark-mode) .feature-btn:hover,
+body.theme-neon:not(.dark-mode) .export-btn:hover {
+  background: linear-gradient(45deg, #ff0080, #ff00a6);
+  box-shadow: 0 0 20px rgba(255, 0, 107, 0.5);
+}
+
+body.theme-neon:not(.dark-mode) .preset-btn.active {
+  background: linear-gradient(45deg, #ff006b, #ffd93d);
+  box-shadow: 0 0 25px rgba(255, 107, 107, 0.6);
+}
+
+body.theme-neon:not(.dark-mode) .export-group select,
+body.theme-neon:not(.dark-mode) .export-group input,
+body.theme-neon:not(.dark-mode) .preset-actions input {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #ff006b;
+  color: #ff006b;
+}
+
+/* ===== TEMA NEON ESCURO - BOTÕES DOS PAINÉIS ===== */
+body.theme-neon.dark-mode #metronome-toggle,
+body.theme-neon.dark-mode #seq-record,
+body.theme-neon.dark-mode #seq-play,
+body.theme-neon.dark-mode #seq-clear,
+body.theme-neon.dark-mode #export-audio,
+body.theme-neon.dark-mode #show-favorites,
+body.theme-neon.dark-mode .preset-btn,
+body.theme-neon.dark-mode .feature-btn,
+body.theme-neon.dark-mode .export-btn,
+body.theme-neon.dark-mode .record-control,
+body.theme-neon.dark-mode #start-recording,
+body.theme-neon.dark-mode #stop-recording,
+body.theme-neon.dark-mode #save-recording,
+body.theme-neon.dark-mode #simon-start,
+body.theme-neon.dark-mode #save-current-preset,
+body.theme-neon.dark-mode #start-export,
+body.theme-neon.dark-mode #record-export {
+  background: linear-gradient(45deg, #000000, #001a1a);
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+body.theme-neon.dark-mode #metronome-toggle:hover,
+body.theme-neon.dark-mode #seq-record:hover,
+body.theme-neon.dark-mode #seq-play:hover,
+body.theme-neon.dark-mode #seq-clear:hover,
+body.theme-neon.dark-mode #export-audio:hover,
+body.theme-neon.dark-mode #show-favorites:hover,
+body.theme-neon.dark-mode .preset-btn:hover,
+body.theme-neon.dark-mode .feature-btn:hover,
+body.theme-neon.dark-mode .export-btn:hover,
+body.theme-neon.dark-mode .record-control:hover,
+body.theme-neon.dark-mode #start-recording:hover,
+body.theme-neon.dark-mode #stop-recording:hover,
+body.theme-neon.dark-mode #save-recording:hover,
+body.theme-neon.dark-mode #simon-start:hover,
+body.theme-neon.dark-mode #save-current-preset:hover,
+body.theme-neon.dark-mode #start-export:hover,
+body.theme-neon.dark-mode #record-export:hover {
+  background: linear-gradient(45deg, #001a1a, #003333);
+  box-shadow: 0 0 30px #00ffff;
+}
+
+body.theme-neon.dark-mode .effects-panel,
+body.theme-neon.dark-mode .features-panel,
+body.theme-neon.dark-mode .export-modal,
+body.theme-neon.dark-mode .favorites-modal {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+body.theme-neon.dark-mode .effect-group {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+body.theme-neon.dark-mode .effect-slider::-webkit-slider-thumb {
+  background: #00ffff;
+}
+
+body.theme-neon.dark-mode .preset-btn,
+body.theme-neon.dark-mode .feature-btn,
+body.theme-neon.dark-mode .export-btn {
+  background: linear-gradient(45deg, #000000, #001a1a);
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+body.theme-neon.dark-mode .preset-btn:hover,
+body.theme-neon.dark-mode .feature-btn:hover,
+body.theme-neon.dark-mode .export-btn:hover {
+  background: linear-gradient(45deg, #001a1a, #003333);
+  box-shadow: 0 0 30px #00ffff;
+}
+
+body.theme-neon.dark-mode .preset-btn.active {
+  background: linear-gradient(45deg, #00ffff, #66ffff);
+  color: #000000;
+  box-shadow: 0 0 30px #00ffff;
+}
+
+body.theme-neon.dark-mode .export-group select,
+body.theme-neon.dark-mode .export-group input,
+body.theme-neon.dark-mode .preset-actions input {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00ffff;
+  color: #00ffff;
+}
+
+/* ===== TEMA RETRO CLARO ===== */
+body.theme-retro:not(.dark-mode) .effects-panel,
+body.theme-retro:not(.dark-mode) .features-panel,
+body.theme-retro:not(.dark-mode) .export-modal,
+body.theme-retro:not(.dark-mode) .favorites-modal {
+  background: linear-gradient(to bottom, #DEB887 0%, #F5DEB3 100%);
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  color: #8B4513;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro:not(.dark-mode) .effect-group {
+  background: rgba(139, 69, 19, 0.1);
+  border-radius: 0;
+}
+
+body.theme-retro:not(.dark-mode) .effect-slider::-webkit-slider-thumb {
+  background: #8B4513;
+  border-radius: 0;
+}
+
+body.theme-retro:not(.dark-mode) .preset-btn,
+body.theme-retro:not(.dark-mode) .feature-btn,
+body.theme-retro:not(.dark-mode) .export-btn,
+body.theme-retro:not(.dark-mode) .record-control {
+  background: #D2B48C;
+  color: #8B4513;
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro:not(.dark-mode) .preset-btn:hover,
+body.theme-retro:not(.dark-mode) .feature-btn:hover,
+body.theme-retro:not(.dark-mode) .export-btn:hover,
+body.theme-retro:not(.dark-mode) .record-control:hover {
+  background: #C7A572;
+  border: 3px outset #C7A572;
+  box-shadow: 2px 2px 0 #8B4513, 4px 4px 8px rgba(139, 69, 19, 0.3);
+}
+
+body.theme-retro:not(.dark-mode) .preset-btn.active {
+  background: #B8860B;
+  border: 3px inset #D2B48C;
+  box-shadow: 2px 2px 0 #A0522D inset;
+}
+
+body.theme-retro:not(.dark-mode) .export-group select,
+body.theme-retro:not(.dark-mode) .export-group input,
+body.theme-retro:not(.dark-mode) .preset-actions input {
+  background: #F5DEB3;
+  border: 2px solid #8B4513;
+  color: #8B4513;
+  font-family: 'Courier New', monospace;
+}
+
+/* ===== TEMA RETRO ESCURO ===== */
+body.theme-retro.dark-mode .effects-panel,
+body.theme-retro.dark-mode .features-panel,
+body.theme-retro.dark-mode .export-modal,
+body.theme-retro.dark-mode .favorites-modal {
+  background: linear-gradient(to bottom, #666666 0%, #555555 100%);
+  border: 3px outset #666666;
+  border-radius: 0;
+  color: white;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode .effect-group {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+}
+
+body.theme-retro.dark-mode .effect-slider::-webkit-slider-thumb {
+  background: white;
+  border-radius: 0;
+}
+
+body.theme-retro.dark-mode .preset-btn,
+body.theme-retro.dark-mode .feature-btn,
+body.theme-retro.dark-mode .export-btn,
+body.theme-retro.dark-mode .record-control {
+  background: #666666;
+  color: white;
+  border: 3px outset #666666;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode .preset-btn:hover,
+body.theme-retro.dark-mode .feature-btn:hover,
+body.theme-retro.dark-mode .export-btn:hover,
+body.theme-retro.dark-mode .record-control:hover {
+  background: #777777;
+  border: 3px outset #777777;
+}
+
+body.theme-retro.dark-mode .preset-btn.active {
+  background: #555555;
+  border: 3px inset #666666;
+  box-shadow: 2px 2px 0 #222222 inset;
+}
+
+body.theme-retro.dark-mode .export-group select,
+body.theme-retro.dark-mode .export-group input,
+body.theme-retro.dark-mode .preset-actions input {
+  background: #666666;
+  border: 2px solid white;
+  color: white;
+  font-family: 'Courier New', monospace;
+}
+
+/* ===== TEMA MINIMAL CLARO ===== */
+body.theme-minimal:not(.dark-mode) .effects-panel,
+body.theme-minimal:not(.dark-mode) .features-panel,
+body.theme-minimal:not(.dark-mode) .export-modal,
+body.theme-minimal:not(.dark-mode) .favorites-modal {
+  background: white;
+  border: 2px solid #000000;
+  color: #333;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+}
+
+body.theme-minimal:not(.dark-mode) .effect-group {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.theme-minimal:not(.dark-mode) .effect-slider::-webkit-slider-thumb {
+  background: #000000;
+}
+
+body.theme-minimal:not(.dark-mode) .preset-btn,
+body.theme-minimal:not(.dark-mode) .feature-btn,
+body.theme-minimal:not(.dark-mode) .export-btn,
+body.theme-minimal:not(.dark-mode) .record-control {
+  background: #000000;
+  color: white;
+  border: 2px solid #000000;
+}
+
+body.theme-minimal:not(.dark-mode) .preset-btn:hover,
+body.theme-minimal:not(.dark-mode) .feature-btn:hover,
+body.theme-minimal:not(.dark-mode) .export-btn:hover,
+body.theme-minimal:not(.dark-mode) .record-control:hover {
+  background: #333333;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+body.theme-minimal:not(.dark-mode) .preset-btn.active {
+  background: #333333;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.5) inset;
+}
+
+body.theme-minimal:not(.dark-mode) .export-group select,
+body.theme-minimal:not(.dark-mode) .export-group input,
+body.theme-minimal:not(.dark-mode) .preset-actions input {
+  background: white;
+  border: 2px solid #000000;
+  color: #333;
+}
+
+/* ===== TEMA MINIMAL ESCURO ===== */
+body.theme-minimal.dark-mode .effects-panel,
+body.theme-minimal.dark-mode .features-panel,
+body.theme-minimal.dark-mode .export-modal,
+body.theme-minimal.dark-mode .favorites-modal {
+  background: #404040;
+  border: 2px solid #666666;
+  color: #cccccc;
+}
+
+body.theme-minimal.dark-mode .effect-group {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.theme-minimal.dark-mode .effect-slider::-webkit-slider-thumb {
+  background: #ffffff;
+}
+
+body.theme-minimal.dark-mode .preset-btn,
+body.theme-minimal.dark-mode .feature-btn,
+body.theme-minimal.dark-mode .export-btn,
+body.theme-minimal.dark-mode .record-control {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+}
+
+body.theme-minimal.dark-mode .preset-btn:hover,
+body.theme-minimal.dark-mode .feature-btn:hover,
+body.theme-minimal.dark-mode .export-btn:hover,
+body.theme-minimal.dark-mode .record-control:hover {
+  background: #cccccc;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+body.theme-minimal.dark-mode .preset-btn.active {
+  background: #cccccc;
+  box-shadow: 2px 2px 4px rgba(255,255,255,0.3) inset;
+}
+
+body.theme-minimal.dark-mode .export-group select,
+body.theme-minimal.dark-mode .export-group input,
+body.theme-minimal.dark-mode .preset-actions input {
+  background: #404040;
+  border: 2px solid #666666;
+  color: #cccccc;
+}
+
+/* ===== ESTILOS GERAIS PARA MODAIS NOS TEMAS ===== */
+.export-modal .modal-content,
+.favorites-modal .modal-content {
+  background: inherit;
+  color: inherit;
+  border: inherit;
+  box-shadow: inherit;
+  font-family: inherit;
+}
+
+/* Garantir que modais herdem os estilos do tema ativo */
+#export-modal .modal-content,
+#favorites-modal .modal-content {
+  background-color: inherit;
+}
+
+/* Estilos específicos para modais de exportação e favoritos nos temas */
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #export-modal .modal-content,
+body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #favorites-modal .modal-content {
+  background-color: #2a2a2a;
+  color: white;
+  border: 2px solid #444;
+}
+
+body.theme-neon:not(.dark-mode) #export-modal .modal-content,
+body.theme-neon:not(.dark-mode) #favorites-modal .modal-content {
+  background: linear-gradient(45deg, #fff5f9 0%, #ffe8f1 100%);
+  color: #ff006b;
+  border: 3px solid #ff006b;
+  box-shadow: 0 0 30px rgba(255, 0, 107, 0.5);
+}
+
+body.theme-neon.dark-mode #export-modal .modal-content,
+body.theme-neon.dark-mode #favorites-modal .modal-content {
+  background: linear-gradient(45deg, #000000 0%, #1a1a2e 100%);
+  color: #00ffff;
+  border: 3px solid #00ffff;
+  box-shadow: 0 0 30px #00ffff;
+}
+
+body.theme-retro:not(.dark-mode) #export-modal .modal-content,
+body.theme-retro:not(.dark-mode) #favorites-modal .modal-content {
+  background: linear-gradient(45deg, #DEB887 0%, #F5DEB3 100%);
+  color: #8B4513;
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode #export-modal .modal-content,
+body.theme-retro.dark-mode #favorites-modal .modal-content {
+  background: linear-gradient(45deg, #666666 0%, #555555 100%);
+  color: white;
+  border: 3px outset #666666;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-minimal:not(.dark-mode) #export-modal .modal-content,
+body.theme-minimal:not(.dark-mode) #favorites-modal .modal-content {
+  background: white;
+  color: #333;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+}
+
+body.theme-minimal.dark-mode #export-modal .modal-content,
+body.theme-minimal.dark-mode #favorites-modal .modal-content {
+  background: #404040;
+  color: #cccccc;
+  border: 2px solid #666666;
+}
+
+/* Favicons de coração para todos os temas */
+.heart-icon,
+.favorite-heart {
+  font-size: 1.2em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+.heart-icon.active,
+.favorite-heart {
+  color: #ff0066;
+  text-shadow: 0 0 10px rgba(255, 0, 102, 0.6);
+}
+
+/* Ajustes para elementos específicos em todos os temas */
+body.theme-neon .heart-icon.active,
+body.theme-neon .favorite-heart { 
+  color: #ff006b; 
+  text-shadow: 0 0 10px rgba(255, 0, 107, 0.8); 
+}
+
+body.theme-neon.dark-mode .heart-icon.active,
+body.theme-neon.dark-mode .favorite-heart { 
+  color: #00ffff; 
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); 
+}
+
+body.theme-retro .heart-icon.active,
+body.theme-retro .favorite-heart { 
+  color: #8B4513; 
+  text-shadow: none; 
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+}
+
+body.theme-retro.dark-mode .heart-icon.active,
+body.theme-retro.dark-mode .favorite-heart { 
+  color: white; 
+  text-shadow: none; 
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.8));
+}
+
+body.theme-minimal .heart-icon.active,
+body.theme-minimal .favorite-heart { 
+  color: #000000; 
+  text-shadow: none; 
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+body.theme-minimal.dark-mode .heart-icon.active,
+body.theme-minimal.dark-mode .favorite-heart { 
+  color: #ffffff; 
+  text-shadow: none; 
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.3));
 }
 
 /* Responsive design */
@@ -520,4 +1551,572 @@ h1 {
   .teclado {
     grid-template-columns: repeat(2, 1fr); /* 2 botões por linha em telas muito pequenas */
   }
+}
+
+/* Master Controls */
+.master-controls {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 15px;
+  margin: 20px 0;
+  text-align: center;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.master-controls label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  color: inherit;
+}
+
+.master-controls input[type="range"] {
+  width: 150px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Modal styles - Tema Padrão */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 30px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  color: #333;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: black;
+}
+
+#simon-start {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px;
+  transition: all 0.3s ease;
+}
+
+#simon-start:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Modal - Tema Escuro */
+body.dark-mode .modal-content {
+  background-color: #2a2a2a;
+  color: white;
+  border: 2px solid #444;
+}
+
+body.dark-mode .close {
+  color: #ccc;
+}
+
+body.dark-mode .close:hover {
+  color: white;
+}
+
+body.dark-mode #simon-start {
+  background: #007bff;
+  color: white;
+}
+
+body.dark-mode #simon-start:hover {
+  background: #0056b3;
+}
+
+/* Modal - Tema Neon Claro */
+body.theme-neon:not(.dark-mode) .modal-content {
+  background: linear-gradient(45deg, #fff5f9 0%, #ffe8f1 100%);
+  color: #ff006b;
+  border: 3px solid #ff006b;
+  box-shadow: 0 0 30px rgba(255, 0, 107, 0.5);
+}
+
+body.theme-neon:not(.dark-mode) .close {
+  color: #ff006b;
+}
+
+body.theme-neon:not(.dark-mode) .close:hover {
+  color: #ff0080;
+}
+
+body.theme-neon:not(.dark-mode) #simon-start {
+  background: #ff006b;
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 0, 107, 0.5);
+}
+
+body.theme-neon:not(.dark-mode) #simon-start:hover {
+  background: #ff0080;
+  box-shadow: 0 0 20px rgba(255, 0, 107, 0.7);
+}
+
+/* Modal - Tema Neon Escuro */
+body.theme-neon.dark-mode .modal-content {
+  background: linear-gradient(45deg, #000000 0%, #1a1a2e 100%);
+  color: #00ffff;
+  border: 3px solid #00ffff;
+  box-shadow: 0 0 30px #00ffff;
+}
+
+body.theme-neon.dark-mode .close {
+  color: #00ffff;
+}
+
+body.theme-neon.dark-mode .close:hover {
+  color: #66ffff;
+}
+
+body.theme-neon.dark-mode #simon-start {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+body.theme-neon.dark-mode #simon-start:hover {
+  background: #66ffff;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+/* Modal - Tema Retro Claro */
+body.theme-retro:not(.dark-mode) .modal-content {
+  background: linear-gradient(45deg, #DEB887 0%, #F5DEB3 100%);
+  color: #8B4513;
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro:not(.dark-mode) .close {
+  color: #8B4513;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro:not(.dark-mode) .close:hover {
+  color: #654321;
+}
+
+body.theme-retro:not(.dark-mode) #simon-start {
+  background: #D2B48C;
+  color: #8B4513;
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro:not(.dark-mode) #simon-start:hover {
+  background: #B8860B;
+  border: 3px inset #D2B48C;
+}
+
+/* Modal - Tema Retro Escuro */
+body.theme-retro.dark-mode .modal-content {
+  background: linear-gradient(45deg, #666666 0%, #555555 100%);
+  color: white;
+  border: 3px outset #666666;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode .close {
+  color: white;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode .close:hover {
+  color: #ccc;
+}
+
+body.theme-retro.dark-mode #simon-start {
+  background: #666666;
+  color: white;
+  border: 3px outset #666666;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode #simon-start:hover {
+  background: #777777;
+  border: 3px inset #666666;
+}
+
+/* Modal - Tema Minimal Claro */
+body.theme-minimal:not(.dark-mode) .modal-content {
+  background: white;
+  color: #333;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+}
+
+body.theme-minimal:not(.dark-mode) .close {
+  color: #333;
+}
+
+body.theme-minimal:not(.dark-mode) .close:hover {
+  color: #000;
+}
+
+body.theme-minimal:not(.dark-mode) #simon-start {
+  background: #000000;
+  color: white;
+  border: 2px solid #000000;
+}
+
+body.theme-minimal:not(.dark-mode) #simon-start:hover {
+  background: #333333;
+}
+
+/* Modal - Tema Minimal Escuro */
+body.theme-minimal.dark-mode .modal-content {
+  background: #404040;
+  color: #cccccc;
+  border: 2px solid #666666;
+}
+
+body.theme-minimal.dark-mode .close {
+  color: #cccccc;
+}
+
+body.theme-minimal.dark-mode .close:hover {
+  color: white;
+}
+
+body.theme-minimal.dark-mode #simon-start {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+}
+
+body.theme-minimal.dark-mode #simon-start:hover {
+  background: #cccccc;
+}
+
+.theme-btn,
+.game-btn {
+  background: linear-gradient(45deg, var(--azul), var(--luz));
+  color: var(--branca);
+  border: 2px solid var(--azul_escuro);
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
+  margin: 5px 0;
+  box-shadow: 2px 2px 0 var(--azul_escuro), 0 0 10px rgba(17, 0, 255, 0.2);
+}
+
+.theme-btn:hover,
+.game-btn:hover {
+  background: linear-gradient(45deg, var(--luz), #a9a9ff);
+  color: var(--branca);
+  border-color: var(--luz);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--luz), 2px 2px 0 var(--azul_escuro);
+}
+
+.theme-btn:active,
+.game-btn:active {
+  background: var(--azul_escuro);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 1px 1px 0 var(--azul), inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#metronome-toggle,
+#seq-record,
+#seq-play,
+#seq-clear,
+#export-audio,
+#show-favorites,
+.preset-btn,
+.feature-btn,
+.export-btn,
+.record-control,
+#start-recording,
+#stop-recording,
+#save-recording,
+#simon-start,
+#save-current-preset,
+#start-export,
+#record-export {
+  background: linear-gradient(45deg, var(--azul), var(--luz));
+  color: var(--branca);
+  border: 2px solid var(--azul_escuro);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 3px;
+  box-shadow: 2px 2px 0 var(--azul_escuro), 0 0 8px rgba(17, 0, 255, 0.2);
+}
+
+#metronome-toggle:hover,
+#seq-record:hover,
+#seq-play:hover,
+#seq-clear:hover,
+#export-audio:hover,
+#show-favorites:hover,
+.preset-btn:hover,
+.feature-btn:hover,
+.export-btn:hover,
+.record-control:hover,
+#start-recording:hover,
+#stop-recording:hover,
+#save-recording:hover,
+#simon-start:hover,
+#save-current-preset:hover,
+#start-export:hover,
+#record-export:hover {
+  background: linear-gradient(45deg, var(--luz), #a9a9ff);
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px var(--luz), 2px 2px 0 var(--azul_escuro);
+}
+
+#bpm-slider {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  margin: 8px 0;
+}
+
+#bpm-display {
+  font-weight: bold;
+  color: inherit;
+  font-size: 0.9em;
+}
+
+#game-score,
+#game-status,
+#sequence-display {
+  font-size: 0.85em;
+  color: inherit;
+  margin: 5px 0;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+body.theme-retro:not(.dark-mode) #metronome-toggle,
+body.theme-retro:not(.dark-mode) #seq-record,
+body.theme-retro:not(.dark-mode) #seq-play,
+body.theme-retro:not(.dark-mode) #seq-clear,
+body.theme-retro:not(.dark-mode) #export-audio,
+body.theme-retro:not(.dark-mode) #show-favorites,
+body.theme-retro:not(.dark-mode) .preset-btn,
+body.theme-retro:not(.dark-mode) .feature-btn,
+body.theme-retro:not(.dark-mode) .export-btn,
+body.theme-retro:not(.dark-mode) .record-control,
+body.theme-retro:not(.dark-mode) #start-recording,
+body.theme-retro:not(.dark-mode) #stop-recording,
+body.theme-retro:not(.dark-mode) #save-recording,
+body.theme-retro:not(.dark-mode) #simon-start,
+body.theme-retro:not(.dark-mode) #save-current-preset,
+body.theme-retro:not(.dark-mode) #start-export,
+body.theme-retro:not(.dark-mode) #record-export {
+  background: #D2B48C;
+  color: #8B4513;
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro:not(.dark-mode) #metronome-toggle:hover,
+body.theme-retro:not(.dark-mode) #seq-record:hover,
+body.theme-retro:not(.dark-mode) #seq-play:hover,
+body.theme-retro:not(.dark-mode) #seq-clear:hover,
+body.theme-retro:not(.dark-mode) #export-audio:hover,
+body.theme-retro:not(.dark-mode) #show-favorites:hover,
+body.theme-retro:not(.dark-mode) .preset-btn:hover,
+body.theme-retro:not(.dark-mode) .feature-btn:hover,
+body.theme-retro:not(.dark-mode) .export-btn:hover,
+body.theme-retro:not(.dark-mode) .record-control:hover,
+body.theme-retro:not(.dark-mode) #start-recording:hover,
+body.theme-retro:not(.dark-mode) #stop-recording:hover,
+body.theme-retro:not(.dark-mode) #save-recording:hover,
+body.theme-retro:not(.dark-mode) #simon-start:hover,
+body.theme-retro:not(.dark-mode) #save-current-preset:hover,
+body.theme-retro:not(.dark-mode) #start-export:hover,
+body.theme-retro:not(.dark-mode) #record-export:hover {
+  background: #C7A572;
+  border: 3px outset #C7A572;
+  box-shadow: 2px 2px 0 #8B4513, 4px 4px 8px rgba(139, 69, 19, 0.3);
+}
+
+
+body.theme-retro.dark-mode #metronome-toggle,
+body.theme-retro.dark-mode #seq-record,
+body.theme-retro.dark-mode #seq-play,
+body.theme-retro.dark-mode #seq-clear,
+body.theme-retro.dark-mode #export-audio,
+body.theme-retro.dark-mode #show-favorites,
+body.theme-retro.dark-mode .preset-btn,
+body.theme-retro.dark-mode .feature-btn,
+body.theme-retro.dark-mode .export-btn,
+body.theme-retro.dark-mode .record-control,
+body.theme-retro.dark-mode #start-recording,
+body.theme-retro.dark-mode #stop-recording,
+body.theme-retro.dark-mode #save-recording,
+body.theme-retro.dark-mode #simon-start,
+body.theme-retro.dark-mode #save-current-preset,
+body.theme-retro.dark-mode #start-export,
+body.theme-retro.dark-mode #record-export {
+  background: #666666;
+  color: white;
+  border: 3px outset #666666;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body.theme-retro.dark-mode #metronome-toggle:hover,
+body.theme-retro.dark-mode #seq-record:hover,
+body.theme-retro.dark-mode #seq-play:hover,
+body.theme-retro.dark-mode #seq-clear:hover,
+body.theme-retro.dark-mode #export-audio:hover,
+body.theme-retro.dark-mode #show-favorites:hover,
+body.theme-retro.dark-mode .preset-btn:hover,
+body.theme-retro.dark-mode .feature-btn:hover,
+body.theme-retro.dark-mode .export-btn:hover,
+body.theme-retro.dark-mode .record-control:hover,
+body.theme-retro.dark-mode #start-recording:hover,
+body.theme-retro.dark-mode #stop-recording:hover,
+body.theme-retro.dark-mode #save-recording:hover,
+body.theme-retro.dark-mode #simon-start:hover,
+body.theme-retro.dark-mode #save-current-preset:hover,
+body.theme-retro.dark-mode #start-export:hover,
+body.theme-retro.dark-mode #record-export:hover {
+  background: #777777;
+  border: 3px outset #777777;
+}
+
+body.theme-minimal:not(.dark-mode) #metronome-toggle,
+body.theme-minimal:not(.dark-mode) #seq-record,
+body.theme-minimal:not(.dark-mode) #seq-play,
+body.theme-minimal:not(.dark-mode) #seq-clear,
+body.theme-minimal:not(.dark-mode) #export-audio,
+body.theme-minimal:not(.dark-mode) #show-favorites,
+body.theme-minimal:not(.dark-mode) .preset-btn,
+body.theme-minimal:not(.dark-mode) .feature-btn,
+body.theme-minimal:not(.dark-mode) .export-btn,
+body.theme-minimal:not(.dark-mode) .record-control,
+body.theme-minimal:not(.dark-mode) #start-recording,
+body.theme-minimal:not(.dark-mode) #stop-recording,
+body.theme-minimal:not(.dark-mode) #save-recording,
+body.theme-minimal:not(.dark-mode) #simon-start,
+body.theme-minimal:not(.dark-mode) #save-current-preset,
+body.theme-minimal:not(.dark-mode) #start-export,
+body.theme-minimal:not(.dark-mode) #record-export {
+  background: #000000;
+  color: white;
+  border: 2px solid #000000;
+}
+
+body.theme-minimal:not(.dark-mode) #metronome-toggle:hover,
+body.theme-minimal:not(.dark-mode) #seq-record:hover,
+body.theme-minimal:not(.dark-mode) #seq-play:hover,
+body.theme-minimal:not(.dark-mode) #seq-clear:hover,
+body.theme-minimal:not(.dark-mode) #export-audio:hover,
+body.theme-minimal:not(.dark-mode) #show-favorites:hover,
+body.theme-minimal:not(.dark-mode) .preset-btn:hover,
+body.theme-minimal:not(.dark-mode) .feature-btn:hover,
+body.theme-minimal:not(.dark-mode) .export-btn:hover,
+body.theme-minimal:not(.dark-mode) .record-control:hover,
+body.theme-minimal:not(.dark-mode) #start-recording:hover,
+body.theme-minimal:not(.dark-mode) #stop-recording:hover,
+body.theme-minimal:not(.dark-mode) #save-recording:hover,
+body.theme-minimal:not(.dark-mode) #simon-start:hover,
+body.theme-minimal:not(.dark-mode) #save-current-preset:hover,
+body.theme-minimal:not(.dark-mode) #start-export:hover,
+body.theme-minimal:not(.dark-mode) #record-export:hover {
+  background: #333333;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+body.theme-minimal.dark-mode #metronome-toggle,
+body.theme-minimal.dark-mode #seq-record,
+body.theme-minimal.dark-mode #seq-play,
+body.theme-minimal.dark-mode #seq-clear,
+body.theme-minimal.dark-mode #export-audio,
+body.theme-minimal.dark-mode #show-favorites,
+body.theme-minimal.dark-mode .preset-btn,
+body.theme-minimal.dark-mode .feature-btn,
+body.theme-minimal.dark-mode .export-btn,
+body.theme-minimal.dark-mode .record-control,
+body.theme-minimal.dark-mode #start-recording,
+body.theme-minimal.dark-mode #stop-recording,
+body.theme-minimal.dark-mode #save-recording,
+body.theme-minimal.dark-mode #simon-start,
+body.theme-minimal.dark-mode #save-current-preset,
+body.theme-minimal.dark-mode #start-export,
+body.theme-minimal.dark-mode #record-export {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+}
+
+body.theme-minimal.dark-mode #metronome-toggle:hover,
+body.theme-minimal.dark-mode #seq-record:hover,
+body.theme-minimal.dark-mode #seq-play:hover,
+body.theme-minimal.dark-mode #seq-clear:hover,
+body.theme-minimal.dark-mode #export-audio:hover,
+body.theme-minimal.dark-mode #show-favorites:hover,
+body.theme-minimal.dark-mode .preset-btn:hover,
+body.theme-minimal.dark-mode .feature-btn:hover,
+body.theme-minimal.dark-mode .export-btn:hover,
+body.theme-minimal.dark-mode .record-control:hover,
+body.theme-minimal.dark-mode #start-recording:hover,
+body.theme-minimal.dark-mode #stop-recording:hover,
+body.theme-minimal.dark-mode #save-recording:hover,
+body.theme-minimal.dark-mode #simon-start:hover,
+body.theme-minimal.dark-mode #save-current-preset:hover,
+body.theme-minimal.dark-mode #start-export:hover,
+body.theme-minimal.dark-mode #record-export:hover {
+  background: #cccccc;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 2px 2px 4px rgba(0,0,0,0.3);
 }
