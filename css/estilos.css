@@ -31,6 +31,17 @@ h1 {
   background-clip: text;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Remover gradiente do h1 quando temas estão ativos */
+body.theme-neon h1,
+body.theme-retro h1,
+body.theme-minimal h1 {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
 }
 
 .keyboard-info {
@@ -285,6 +296,11 @@ body.theme-retro {
   font-family: 'Courier New', monospace;
 }
 
+body.theme-retro h1,
+body.theme-retro .keyboard-info {
+  color: #8B4513;
+}
+
 body.theme-retro .tecla {
   background: #D2B48C;
   color: #8B4513;
@@ -326,6 +342,11 @@ body.theme-retro.dark-mode {
   background: linear-gradient(45deg, #4a2c0a 0%, #6b4423 100%);
 }
 
+body.theme-retro.dark-mode h1,
+body.theme-retro.dark-mode .keyboard-info {
+  color: #ffffff;
+}
+
 body.theme-retro.dark-mode .tecla {
   background: #333333;
   color: #ffffff;
@@ -345,6 +366,21 @@ body.theme-retro.dark-mode .tecla.simon-highlight {
 body.theme-retro.dark-mode .teclado {
   background: linear-gradient(to bottom, #666666 0%, #555555 100%);
   box-shadow: 6px 8px 0 6px #333, 10px 10px 10px #000;
+}
+
+/* TEMA RETRO CLARO - Botões de tema e jogos */
+body.theme-retro .theme-btn,
+body.theme-retro .game-btn {
+  background: #8B4513;
+  color: #ffffff;
+  border: 2px solid #654321;
+  box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+}
+
+body.theme-retro .theme-btn:hover,
+body.theme-retro .game-btn:hover {
+  background: #A0522D;
+  border: 2px solid #8B4513;
 }
 
 body.theme-retro.dark-mode .theme-panel,
@@ -558,6 +594,29 @@ body.theme-neon.dark-mode .control-btn {
   color: #00ffff;
   border: 2px solid #00ffff;
   box-shadow: 0 0 15px #00ffff;
+}
+
+/* Tema retro claro controles */
+body.theme-retro:not(.dark-mode) .controls {
+  background: linear-gradient(45deg, #DEB887 0%, #F5DEB3 100%);
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  box-shadow: 4px 4px 8px rgba(139, 69, 19, 0.3);
+}
+
+body.theme-retro:not(.dark-mode) .control-btn {
+  background: #D2B48C;
+  color: #8B4513;
+  border: 3px outset #D2B48C;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+body.theme-retro:not(.dark-mode) .control-btn:hover {
+  background: #C7A572;
+  border: 3px outset #C7A572;
+  box-shadow: 2px 2px 0 #8B4513, 4px 4px 8px rgba(139, 69, 19, 0.3);
 }
 
 body.theme-retro.dark-mode .controls {
@@ -898,652 +957,6 @@ body.theme-minimal .control-btn {
   
   .preset-actions {
     flex-direction: column;
-  }
-}
-
-/* ===== TEMAS COMPLETOS PARA NOVOS PAINÉIS E MODAIS ===== */
-
-/* ===== TEMA PADRÃO ESCURO ===== */
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .effects-panel,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .features-panel,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .export-modal,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .favorites-modal {
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid #333;
-  color: white;
-}
-
-/* ===== TEMA PADRÃO ESCURO - BOTÕES DOS PAINÉIS ===== */
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #metronome-toggle,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-record,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-play,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-clear,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #export-audio,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #show-favorites,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .preset-btn,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .feature-btn,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .export-btn,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .record-control,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-recording,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #stop-recording,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-recording,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #simon-start,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-current-preset,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-export,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #record-export {
-  background: rgba(0, 123, 255, 0.8);
-  color: white;
-  border: 1px solid white;
-}
-
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #metronome-toggle:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-record:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-play:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #seq-clear:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #export-audio:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #show-favorites:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .preset-btn:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .feature-btn:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .export-btn:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) .record-control:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-recording:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #stop-recording:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-recording:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #simon-start:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #save-current-preset:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #start-export:hover,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #record-export:hover {
-  background: rgba(0, 123, 255, 1);
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
-}
-
-/* ===== TEMA NEON CLARO - BOTÕES DOS PAINÉIS ===== */
-body.theme-neon:not(.dark-mode) #metronome-toggle,
-body.theme-neon:not(.dark-mode) #seq-record,
-body.theme-neon:not(.dark-mode) #seq-play,
-body.theme-neon:not(.dark-mode) #seq-clear,
-body.theme-neon:not(.dark-mode) #export-audio,
-body.theme-neon:not(.dark-mode) #show-favorites,
-body.theme-neon:not(.dark-mode) .preset-btn,
-body.theme-neon:not(.dark-mode) .feature-btn,
-body.theme-neon:not(.dark-mode) .export-btn,
-body.theme-neon:not(.dark-mode) .record-control,
-body.theme-neon:not(.dark-mode) #start-recording,
-body.theme-neon:not(.dark-mode) #stop-recording,
-body.theme-neon:not(.dark-mode) #save-recording,
-body.theme-neon:not(.dark-mode) #simon-start,
-body.theme-neon:not(.dark-mode) #save-current-preset,
-body.theme-neon:not(.dark-mode) #start-export,
-body.theme-neon:not(.dark-mode) #record-export {
-  background: linear-gradient(45deg, #ff006b, #ff0080);
-  color: white;
-  border: 2px solid #ff006b;
-  box-shadow: 0 0 10px rgba(255, 0, 107, 0.3);
-}
-
-body.theme-neon:not(.dark-mode) #metronome-toggle:hover,
-body.theme-neon:not(.dark-mode) #seq-record:hover,
-body.theme-neon:not(.dark-mode) #seq-play:hover,
-body.theme-neon:not(.dark-mode) #seq-clear:hover,
-body.theme-neon:not(.dark-mode) #export-audio:hover,
-body.theme-neon:not(.dark-mode) #show-favorites:hover,
-body.theme-neon:not(.dark-mode) .preset-btn:hover,
-body.theme-neon:not(.dark-mode) .feature-btn:hover,
-body.theme-neon:not(.dark-mode) .export-btn:hover,
-body.theme-neon:not(.dark-mode) .record-control:hover,
-body.theme-neon:not(.dark-mode) #start-recording:hover,
-body.theme-neon:not(.dark-mode) #stop-recording:hover,
-body.theme-neon:not(.dark-mode) #save-recording:hover,
-body.theme-neon:not(.dark-mode) #simon-start:hover,
-body.theme-neon:not(.dark-mode) #save-current-preset:hover,
-body.theme-neon:not(.dark-mode) #start-export:hover,
-body.theme-neon:not(.dark-mode) #record-export:hover {
-  background: linear-gradient(45deg, #ff0080, #ff33a0);
-  box-shadow: 0 0 20px rgba(255, 0, 107, 0.5);
-}
-
-body.theme-neon:not(.dark-mode) .effects-panel,
-body.theme-neon:not(.dark-mode) .features-panel,
-body.theme-neon:not(.dark-mode) .export-modal,
-body.theme-neon:not(.dark-mode) .favorites-modal {
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid #ff006b;
-  color: #ff006b;
-  box-shadow: 0 0 15px rgba(255, 0, 107, 0.3);
-}
-
-body.theme-neon:not(.dark-mode) .effect-group {
-  background: rgba(255, 0, 107, 0.1);
-}
-
-body.theme-neon:not(.dark-mode) .effect-slider::-webkit-slider-thumb {
-  background: #ff006b;
-}
-
-body.theme-neon:not(.dark-mode) .preset-btn,
-body.theme-neon:not(.dark-mode) .feature-btn,
-body.theme-neon:not(.dark-mode) .export-btn {
-  background: linear-gradient(45deg, #ff006b, #ff0080);
-  color: white;
-  border: 2px solid #ff006b;
-  box-shadow: 0 0 10px rgba(255, 0, 107, 0.3);
-}
-
-body.theme-neon:not(.dark-mode) .preset-btn:hover,
-body.theme-neon:not(.dark-mode) .feature-btn:hover,
-body.theme-neon:not(.dark-mode) .export-btn:hover {
-  background: linear-gradient(45deg, #ff0080, #ff00a6);
-  box-shadow: 0 0 20px rgba(255, 0, 107, 0.5);
-}
-
-body.theme-neon:not(.dark-mode) .preset-btn.active {
-  background: linear-gradient(45deg, #ff006b, #ffd93d);
-  box-shadow: 0 0 25px rgba(255, 107, 107, 0.6);
-}
-
-body.theme-neon:not(.dark-mode) .export-group select,
-body.theme-neon:not(.dark-mode) .export-group input,
-body.theme-neon:not(.dark-mode) .preset-actions input {
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #ff006b;
-  color: #ff006b;
-}
-
-/* ===== TEMA NEON ESCURO - BOTÕES DOS PAINÉIS ===== */
-body.theme-neon.dark-mode #metronome-toggle,
-body.theme-neon.dark-mode #seq-record,
-body.theme-neon.dark-mode #seq-play,
-body.theme-neon.dark-mode #seq-clear,
-body.theme-neon.dark-mode #export-audio,
-body.theme-neon.dark-mode #show-favorites,
-body.theme-neon.dark-mode .preset-btn,
-body.theme-neon.dark-mode .feature-btn,
-body.theme-neon.dark-mode .export-btn,
-body.theme-neon.dark-mode .record-control,
-body.theme-neon.dark-mode #start-recording,
-body.theme-neon.dark-mode #stop-recording,
-body.theme-neon.dark-mode #save-recording,
-body.theme-neon.dark-mode #simon-start,
-body.theme-neon.dark-mode #save-current-preset,
-body.theme-neon.dark-mode #start-export,
-body.theme-neon.dark-mode #record-export {
-  background: linear-gradient(45deg, #000000, #001a1a);
-  color: #00ffff;
-  border: 2px solid #00ffff;
-  box-shadow: 0 0 15px #00ffff;
-}
-
-body.theme-neon.dark-mode #metronome-toggle:hover,
-body.theme-neon.dark-mode #seq-record:hover,
-body.theme-neon.dark-mode #seq-play:hover,
-body.theme-neon.dark-mode #seq-clear:hover,
-body.theme-neon.dark-mode #export-audio:hover,
-body.theme-neon.dark-mode #show-favorites:hover,
-body.theme-neon.dark-mode .preset-btn:hover,
-body.theme-neon.dark-mode .feature-btn:hover,
-body.theme-neon.dark-mode .export-btn:hover,
-body.theme-neon.dark-mode .record-control:hover,
-body.theme-neon.dark-mode #start-recording:hover,
-body.theme-neon.dark-mode #stop-recording:hover,
-body.theme-neon.dark-mode #save-recording:hover,
-body.theme-neon.dark-mode #simon-start:hover,
-body.theme-neon.dark-mode #save-current-preset:hover,
-body.theme-neon.dark-mode #start-export:hover,
-body.theme-neon.dark-mode #record-export:hover {
-  background: linear-gradient(45deg, #001a1a, #003333);
-  box-shadow: 0 0 30px #00ffff;
-}
-
-body.theme-neon.dark-mode .effects-panel,
-body.theme-neon.dark-mode .features-panel,
-body.theme-neon.dark-mode .export-modal,
-body.theme-neon.dark-mode .favorites-modal {
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid #00ffff;
-  color: #00ffff;
-  box-shadow: 0 0 20px #00ffff;
-}
-
-body.theme-neon.dark-mode .effect-group {
-  background: rgba(0, 255, 255, 0.1);
-}
-
-body.theme-neon.dark-mode .effect-slider::-webkit-slider-thumb {
-  background: #00ffff;
-}
-
-body.theme-neon.dark-mode .preset-btn,
-body.theme-neon.dark-mode .feature-btn,
-body.theme-neon.dark-mode .export-btn {
-  background: linear-gradient(45deg, #000000, #001a1a);
-  color: #00ffff;
-  border: 2px solid #00ffff;
-  box-shadow: 0 0 15px #00ffff;
-}
-
-body.theme-neon.dark-mode .preset-btn:hover,
-body.theme-neon.dark-mode .feature-btn:hover,
-body.theme-neon.dark-mode .export-btn:hover {
-  background: linear-gradient(45deg, #001a1a, #003333);
-  box-shadow: 0 0 30px #00ffff;
-}
-
-body.theme-neon.dark-mode .preset-btn.active {
-  background: linear-gradient(45deg, #00ffff, #66ffff);
-  color: #000000;
-  box-shadow: 0 0 30px #00ffff;
-}
-
-body.theme-neon.dark-mode .export-group select,
-body.theme-neon.dark-mode .export-group input,
-body.theme-neon.dark-mode .preset-actions input {
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid #00ffff;
-  color: #00ffff;
-}
-
-/* ===== TEMA RETRO CLARO ===== */
-body.theme-retro:not(.dark-mode) .effects-panel,
-body.theme-retro:not(.dark-mode) .features-panel,
-body.theme-retro:not(.dark-mode) .export-modal,
-body.theme-retro:not(.dark-mode) .favorites-modal {
-  background: linear-gradient(to bottom, #DEB887 0%, #F5DEB3 100%);
-  border: 3px outset #D2B48C;
-  border-radius: 0;
-  color: #8B4513;
-  font-family: 'Courier New', monospace;
-}
-
-body.theme-retro:not(.dark-mode) .effect-group {
-  background: rgba(139, 69, 19, 0.1);
-  border-radius: 0;
-}
-
-body.theme-retro:not(.dark-mode) .effect-slider::-webkit-slider-thumb {
-  background: #8B4513;
-  border-radius: 0;
-}
-
-body.theme-retro:not(.dark-mode) .preset-btn,
-body.theme-retro:not(.dark-mode) .feature-btn,
-body.theme-retro:not(.dark-mode) .export-btn,
-body.theme-retro:not(.dark-mode) .record-control {
-  background: #D2B48C;
-  color: #8B4513;
-  border: 3px outset #D2B48C;
-  border-radius: 0;
-  font-family: 'Courier New', monospace;
-}
-
-body.theme-retro:not(.dark-mode) .preset-btn:hover,
-body.theme-retro:not(.dark-mode) .feature-btn:hover,
-body.theme-retro:not(.dark-mode) .export-btn:hover,
-body.theme-retro:not(.dark-mode) .record-control:hover {
-  background: #C7A572;
-  border: 3px outset #C7A572;
-  box-shadow: 2px 2px 0 #8B4513, 4px 4px 8px rgba(139, 69, 19, 0.3);
-}
-
-body.theme-retro:not(.dark-mode) .preset-btn.active {
-  background: #B8860B;
-  border: 3px inset #D2B48C;
-  box-shadow: 2px 2px 0 #A0522D inset;
-}
-
-body.theme-retro:not(.dark-mode) .export-group select,
-body.theme-retro:not(.dark-mode) .export-group input,
-body.theme-retro:not(.dark-mode) .preset-actions input {
-  background: #F5DEB3;
-  border: 2px solid #8B4513;
-  color: #8B4513;
-  font-family: 'Courier New', monospace;
-}
-
-/* ===== TEMA RETRO ESCURO ===== */
-body.theme-retro.dark-mode .effects-panel,
-body.theme-retro.dark-mode .features-panel,
-body.theme-retro.dark-mode .export-modal,
-body.theme-retro.dark-mode .favorites-modal {
-  background: linear-gradient(to bottom, #666666 0%, #555555 100%);
-  border: 3px outset #666666;
-  border-radius: 0;
-  color: white;
-  font-family: 'Courier New', monospace;
-}
-
-body.theme-retro.dark-mode .effect-group {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 0;
-}
-
-body.theme-retro.dark-mode .effect-slider::-webkit-slider-thumb {
-  background: white;
-  border-radius: 0;
-}
-
-body.theme-retro.dark-mode .preset-btn,
-body.theme-retro.dark-mode .feature-btn,
-body.theme-retro.dark-mode .export-btn,
-body.theme-retro.dark-mode .record-control {
-  background: #666666;
-  color: white;
-  border: 3px outset #666666;
-  border-radius: 0;
-  font-family: 'Courier New', monospace;
-}
-
-body.theme-retro.dark-mode .preset-btn:hover,
-body.theme-retro.dark-mode .feature-btn:hover,
-body.theme-retro.dark-mode .export-btn:hover,
-body.theme-retro.dark-mode .record-control:hover {
-  background: #777777;
-  border: 3px outset #777777;
-}
-
-body.theme-retro.dark-mode .preset-btn.active {
-  background: #555555;
-  border: 3px inset #666666;
-  box-shadow: 2px 2px 0 #222222 inset;
-}
-
-body.theme-retro.dark-mode .export-group select,
-body.theme-retro.dark-mode .export-group input,
-body.theme-retro.dark-mode .preset-actions input {
-  background: #666666;
-  border: 2px solid white;
-  color: white;
-  font-family: 'Courier New', monospace;
-}
-
-/* ===== TEMA MINIMAL CLARO ===== */
-body.theme-minimal:not(.dark-mode) .effects-panel,
-body.theme-minimal:not(.dark-mode) .features-panel,
-body.theme-minimal:not(.dark-mode) .export-modal,
-body.theme-minimal:not(.dark-mode) .favorites-modal {
-  background: white;
-  border: 2px solid #000000;
-  color: #333;
-  box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
-}
-
-body.theme-minimal:not(.dark-mode) .effect-group {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-body.theme-minimal:not(.dark-mode) .effect-slider::-webkit-slider-thumb {
-  background: #000000;
-}
-
-body.theme-minimal:not(.dark-mode) .preset-btn,
-body.theme-minimal:not(.dark-mode) .feature-btn,
-body.theme-minimal:not(.dark-mode) .export-btn,
-body.theme-minimal:not(.dark-mode) .record-control {
-  background: #000000;
-  color: white;
-  border: 2px solid #000000;
-}
-
-body.theme-minimal:not(.dark-mode) .preset-btn:hover,
-body.theme-minimal:not(.dark-mode) .feature-btn:hover,
-body.theme-minimal:not(.dark-mode) .export-btn:hover,
-body.theme-minimal:not(.dark-mode) .record-control:hover {
-  background: #333333;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5), 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-body.theme-minimal:not(.dark-mode) .preset-btn.active {
-  background: #333333;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5) inset;
-}
-
-body.theme-minimal:not(.dark-mode) .export-group select,
-body.theme-minimal:not(.dark-mode) .export-group input,
-body.theme-minimal:not(.dark-mode) .preset-actions input {
-  background: white;
-  border: 2px solid #000000;
-  color: #333;
-}
-
-/* ===== TEMA MINIMAL ESCURO ===== */
-body.theme-minimal.dark-mode .effects-panel,
-body.theme-minimal.dark-mode .features-panel,
-body.theme-minimal.dark-mode .export-modal,
-body.theme-minimal.dark-mode .favorites-modal {
-  background: #404040;
-  border: 2px solid #666666;
-  color: #cccccc;
-}
-
-body.theme-minimal.dark-mode .effect-group {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-body.theme-minimal.dark-mode .effect-slider::-webkit-slider-thumb {
-  background: #ffffff;
-}
-
-body.theme-minimal.dark-mode .preset-btn,
-body.theme-minimal.dark-mode .feature-btn,
-body.theme-minimal.dark-mode .export-btn,
-body.theme-minimal.dark-mode .record-control {
-  background: #ffffff;
-  color: #000000;
-  border: 2px solid #ffffff;
-}
-
-body.theme-minimal.dark-mode .preset-btn:hover,
-body.theme-minimal.dark-mode .feature-btn:hover,
-body.theme-minimal.dark-mode .export-btn:hover,
-body.theme-minimal.dark-mode .record-control:hover {
-  background: #cccccc;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-body.theme-minimal.dark-mode .preset-btn.active {
-  background: #cccccc;
-  box-shadow: 2px 2px 4px rgba(255,255,255,0.3) inset;
-}
-
-body.theme-minimal.dark-mode .export-group select,
-body.theme-minimal.dark-mode .export-group input,
-body.theme-minimal.dark-mode .preset-actions input {
-  background: #404040;
-  border: 2px solid #666666;
-  color: #cccccc;
-}
-
-/* ===== ESTILOS GERAIS PARA MODAIS NOS TEMAS ===== */
-.export-modal .modal-content,
-.favorites-modal .modal-content {
-  background: inherit;
-  color: inherit;
-  border: inherit;
-  box-shadow: inherit;
-  font-family: inherit;
-}
-
-/* Garantir que modais herdem os estilos do tema ativo */
-#export-modal .modal-content,
-#favorites-modal .modal-content {
-  background-color: inherit;
-}
-
-/* Estilos específicos para modais de exportação e favoritos nos temas */
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #export-modal .modal-content,
-body.dark-mode:not(.theme-neon):not(.theme-retro):not(.theme-minimal) #favorites-modal .modal-content {
-  background-color: #2a2a2a;
-  color: white;
-  border: 2px solid #444;
-}
-
-body.theme-neon:not(.dark-mode) #export-modal .modal-content,
-body.theme-neon:not(.dark-mode) #favorites-modal .modal-content {
-  background: linear-gradient(45deg, #fff5f9 0%, #ffe8f1 100%);
-  color: #ff006b;
-  border: 3px solid #ff006b;
-  box-shadow: 0 0 30px rgba(255, 0, 107, 0.5);
-}
-
-body.theme-neon.dark-mode #export-modal .modal-content,
-body.theme-neon.dark-mode #favorites-modal .modal-content {
-  background: linear-gradient(45deg, #000000 0%, #1a1a2e 100%);
-  color: #00ffff;
-  border: 3px solid #00ffff;
-  box-shadow: 0 0 30px #00ffff;
-}
-
-body.theme-retro:not(.dark-mode) #export-modal .modal-content,
-body.theme-retro:not(.dark-mode) #favorites-modal .modal-content {
-  background: linear-gradient(45deg, #DEB887 0%, #F5DEB3 100%);
-  color: #8B4513;
-  border: 3px outset #D2B48C;
-  border-radius: 0;
-  font-family: 'Courier New', monospace;
-}
-
-body.theme-retro.dark-mode #export-modal .modal-content,
-body.theme-retro.dark-mode #favorites-modal .modal-content {
-  background: linear-gradient(45deg, #666666 0%, #555555 100%);
-  color: white;
-  border: 3px outset #666666;
-  border-radius: 0;
-  font-family: 'Courier New', monospace;
-}
-
-body.theme-minimal:not(.dark-mode) #export-modal .modal-content,
-body.theme-minimal:not(.dark-mode) #favorites-modal .modal-content {
-  background: white;
-  color: #333;
-  border: 2px solid #000000;
-  box-shadow: 4px 4px 8px rgba(0,0,0,0.3);
-}
-
-body.theme-minimal.dark-mode #export-modal .modal-content,
-body.theme-minimal.dark-mode #favorites-modal .modal-content {
-  background: #404040;
-  color: #cccccc;
-  border: 2px solid #666666;
-}
-
-/* Favicons de coração para todos os temas */
-.heart-icon,
-.favorite-heart {
-  font-size: 1.2em;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  z-index: 10;
-  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
-}
-
-.heart-icon.active,
-.favorite-heart {
-  color: #ff0066;
-  text-shadow: 0 0 10px rgba(255, 0, 102, 0.6);
-}
-
-/* Ajustes para elementos específicos em todos os temas */
-body.theme-neon .heart-icon.active,
-body.theme-neon .favorite-heart { 
-  color: #ff006b; 
-  text-shadow: 0 0 10px rgba(255, 0, 107, 0.8); 
-}
-
-body.theme-neon.dark-mode .heart-icon.active,
-body.theme-neon.dark-mode .favorite-heart { 
-  color: #00ffff; 
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); 
-}
-
-body.theme-retro .heart-icon.active,
-body.theme-retro .favorite-heart { 
-  color: #8B4513; 
-  text-shadow: none; 
-  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
-}
-
-body.theme-retro.dark-mode .heart-icon.active,
-body.theme-retro.dark-mode .favorite-heart { 
-  color: white; 
-  text-shadow: none; 
-  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.8));
-}
-
-body.theme-minimal .heart-icon.active,
-body.theme-minimal .favorite-heart { 
-  color: #000000; 
-  text-shadow: none; 
-  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
-}
-
-body.theme-minimal.dark-mode .heart-icon.active,
-body.theme-minimal.dark-mode .favorite-heart { 
-  color: #ffffff; 
-  text-shadow: none; 
-  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.3));
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .controls {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 5px;
-    padding: 8px;
-    z-index: 1001;
-  }
-  
-  .control-btn {
-    padding: 8px 10px;
-    font-size: 12px;
-    border-radius: 15px;
-  }
-  
-  .top-panels {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 80px; /* Espaço para os controles fixos */
-  }
-  
-  .theme-panel, .game-panel, .bpm-controls, .sequencer-panel {
-    width: 90%;
-    min-width: auto;
-  }
-  
-  .teclado {
-    grid-template-columns: repeat(3, 1fr); /* 3 botões por linha no mobile */
-    gap: 8px;
-    padding: 15px;
-  }
-  
-  .tecla {
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    font-size: 1em;
-  }
-  
-  .master-controls {
-    flex-direction: column;
-    gap: 15px;
-    margin: 15px 0;
-  }
-  
-  .master-controls label {
-    flex-direction: row;
-    gap: 10px;
-    font-size: 14px;
-  }
-  
-  .master-controls input[type="range"] {
-    width: 120px;
-    height: 5px;
   }
 }
 
@@ -1932,6 +1345,33 @@ body.theme-minimal.dark-mode #simon-start:hover {
   font-size: 0.9em;
 }
 
+/* Feedback visual para o metrônomo */
+.bpm-controls.metronome-active {
+    animation: metronome-pulse var(--metronome-interval, 500ms) ease-in-out infinite;
+    border: 2px solid #00ff00;
+}
+
+@keyframes metronome-pulse {
+    0% { 
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+    50% { 
+        background: rgba(0, 255, 0, 0.2);
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+    }
+    100% { 
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+}
+
+.bpm-controls.metronome-active #bpm-display {
+    background: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+}
+
 #game-score,
 #game-status,
 #sequence-display {
@@ -2119,4 +1559,221 @@ body.theme-minimal.dark-mode #start-export:hover,
 body.theme-minimal.dark-mode #record-export:hover {
   background: #cccccc;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Feedback visual para efeitos ativos */
+body.reverb-active .effects-panel {
+    box-shadow: 0 0 20px rgba(135, 206, 250, 0.5);
+    background: rgba(135, 206, 250, 0.1);
+}
+
+body.delay-active .effects-panel {
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+    background: rgba(255, 165, 0, 0.1);
+}
+
+body.distortion-active .effects-panel {
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+    background: rgba(255, 69, 0, 0.1);
+}
+
+body.reverb-active.delay-active .effects-panel {
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+    background: rgba(255, 255, 0, 0.1);
+}
+
+body.reverb-active.distortion-active .effects-panel {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+    background: rgba(255, 0, 255, 0.1);
+}
+
+body.delay-active.distortion-active .effects-panel {
+    box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+    background: rgba(255, 20, 147, 0.1);
+}
+
+body.reverb-active.delay-active.distortion-active .effects-panel {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.2);
+    animation: effects-pulse 2s ease-in-out infinite;
+}
+
+@keyframes effects-pulse {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); 
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9); 
+    }
+}
+
+.preset-btn.active {
+    background: linear-gradient(45deg, var(--luz), #a9a9ff) !important;
+    color: var(--azul_escuro) !important;
+    font-weight: bold;
+    box-shadow: 0 0 15px var(--luz);
+    transform: scale(1.05);
+}
+
+/* Efeito nos botões quando efeitos estão ativos */
+body.reverb-active .tecla:hover {
+    box-shadow: 0 0 25px rgba(135, 206, 250, 0.8);
+}
+
+body.delay-active .tecla:hover {
+    box-shadow: 0 0 25px rgba(255, 165, 0, 0.8);
+}
+
+body.distortion-active .tecla:hover {
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.8);
+}
+
+/* ===== ESTILOS PARA BOTÕES DOS PAINÉIS - TEMA NEON CLARO ===== */
+body.theme-neon:not(.dark-mode) #metronome-toggle,
+body.theme-neon:not(.dark-mode) #seq-record,
+body.theme-neon:not(.dark-mode) #seq-play,
+body.theme-neon:not(.dark-mode) #seq-clear,
+body.theme-neon:not(.dark-mode) #export-audio,
+body.theme-neon:not(.dark-mode) #show-favorites,
+body.theme-neon:not(.dark-mode) .preset-btn,
+body.theme-neon:not(.dark-mode) .feature-btn,
+body.theme-neon:not(.dark-mode) .export-btn,
+body.theme-neon:not(.dark-mode) .record-control,
+body.theme-neon:not(.dark-mode) #start-recording,
+body.theme-neon:not(.dark-mode) #stop-recording,
+body.theme-neon:not(.dark-mode) #save-recording,
+body.theme-neon:not(.dark-mode) #simon-start,
+body.theme-neon:not(.dark-mode) #save-current-preset,
+body.theme-neon:not(.dark-mode) #start-export,
+body.theme-neon:not(.dark-mode) #record-export {
+  background: #ff006b !important;
+  color: #ffffff !important;
+  border: 2px solid #ff006b !important;
+  box-shadow: 0 0 10px rgba(255, 0, 107, 0.3) !important;
+}
+
+body.theme-neon:not(.dark-mode) #metronome-toggle:hover,
+body.theme-neon:not(.dark-mode) #seq-record:hover,
+body.theme-neon:not(.dark-mode) #seq-play:hover,
+body.theme-neon:not(.dark-mode) #seq-clear:hover,
+body.theme-neon:not(.dark-mode) #export-audio:hover,
+body.theme-neon:not(.dark-mode) #show-favorites:hover,
+body.theme-neon:not(.dark-mode) .preset-btn:hover,
+body.theme-neon:not(.dark-mode) .feature-btn:hover,
+body.theme-neon:not(.dark-mode) .export-btn:hover,
+body.theme-neon:not(.dark-mode) .record-control:hover,
+body.theme-neon:not(.dark-mode) #start-recording:hover,
+body.theme-neon:not(.dark-mode) #stop-recording:hover,
+body.theme-neon:not(.dark-mode) #save-recording:hover,
+body.theme-neon:not(.dark-mode) #simon-start:hover,
+body.theme-neon:not(.dark-mode) #save-current-preset:hover,
+body.theme-neon:not(.dark-mode) #start-export:hover,
+body.theme-neon:not(.dark-mode) #record-export:hover {
+  background: #ff0080 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 0, 107, 0.6) !important;
+  border-color: #ff0080 !important;
+  transform: translateY(-2px) scale(1.05) !important;
+}
+
+/* ===== ESTILOS PARA BOTÕES DOS PAINÉIS - TEMA NEON ESCURO ===== */
+body.theme-neon.dark-mode #metronome-toggle,
+body.theme-neon.dark-mode #seq-record,
+body.theme-neon.dark-mode #seq-play,
+body.theme-neon.dark-mode #seq-clear,
+body.theme-neon.dark-mode #export-audio,
+body.theme-neon.dark-mode #show-favorites,
+body.theme-neon.dark-mode .preset-btn,
+body.theme-neon.dark-mode .feature-btn,
+body.theme-neon.dark-mode .export-btn,
+body.theme-neon.dark-mode .record-control,
+body.theme-neon.dark-mode #start-recording,
+body.theme-neon.dark-mode #stop-recording,
+body.theme-neon.dark-mode #save-recording,
+body.theme-neon.dark-mode #simon-start,
+body.theme-neon.dark-mode #save-current-preset,
+body.theme-neon.dark-mode #start-export,
+body.theme-neon.dark-mode #record-export {
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: #00ffff !important;
+  border: 2px solid #00ffff !important;
+  box-shadow: 0 0 15px #00ffff !important;
+}
+
+body.theme-neon.dark-mode #metronome-toggle:hover,
+body.theme-neon.dark-mode #seq-record:hover,
+body.theme-neon.dark-mode #seq-play:hover,
+body.theme-neon.dark-mode #seq-clear:hover,
+body.theme-neon.dark-mode #export-audio:hover,
+body.theme-neon.dark-mode #show-favorites:hover,
+body.theme-neon.dark-mode .preset-btn:hover,
+body.theme-neon.dark-mode .feature-btn:hover,
+body.theme-neon.dark-mode .export-btn:hover,
+body.theme-neon.dark-mode .record-control:hover,
+body.theme-neon.dark-mode #start-recording:hover,
+body.theme-neon.dark-mode #stop-recording:hover,
+body.theme-neon.dark-mode #save-recording:hover,
+body.theme-neon.dark-mode #simon-start:hover,
+body.theme-neon.dark-mode #save-current-preset:hover,
+body.theme-neon.dark-mode #start-export:hover,
+body.theme-neon.dark-mode #record-export:hover {
+  background: #001a1a !important;
+  color: #00ffff !important;
+  box-shadow: 0 0 25px #00ffff !important;
+  border-color: #00ffff !important;
+  transform: translateY(-2px) scale(1.05) !important;
+}
+
+/* ===== ESTILOS PARA PAINÉIS - TEMA NEON CLARO ===== */
+body.theme-neon:not(.dark-mode) .effects-panel,
+body.theme-neon:not(.dark-mode) .features-panel {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid #ff006b !important;
+  color: #ff006b !important;
+  box-shadow: 0 0 20px rgba(255, 0, 107, 0.3) !important;
+}
+
+/* ===== ESTILOS PARA PAINÉIS - TEMA NEON ESCURO ===== */
+body.theme-neon.dark-mode .effects-panel,
+body.theme-neon.dark-mode .features-panel {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 2px solid #00ffff !important;
+  color: #00ffff !important;
+  box-shadow: 0 0 20px #00ffff !important;
+}
+
+/* ===== ESTILOS PARA SLIDERS E SELECTS - TEMA NEON ===== */
+body.theme-neon:not(.dark-mode) .effect-slider,
+body.theme-neon:not(.dark-mode) #export-format,
+body.theme-neon:not(.dark-mode) #export-format-select,
+body.theme-neon:not(.dark-mode) #export-quality,
+body.theme-neon:not(.dark-mode) #export-filename,
+body.theme-neon:not(.dark-mode) #new-preset-name {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid #ff006b !important;
+  color: #ff006b !important;
+}
+
+body.theme-neon.dark-mode .effect-slider,
+body.theme-neon.dark-mode #export-format,
+body.theme-neon.dark-mode #export-format-select,
+body.theme-neon.dark-mode #export-quality,
+body.theme-neon.dark-mode #export-filename,
+body.theme-neon.dark-mode #new-preset-name {
+  background: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid #00ffff !important;
+  color: #00ffff !important;
+}
+
+/* ===== ESTILOS PARA PRESET BUTTONS ATIVOS - TEMA NEON ===== */
+body.theme-neon:not(.dark-mode) .preset-btn.active {
+  background: #ff0080 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 25px rgba(255, 0, 107, 0.8) !important;
+}
+
+body.theme-neon.dark-mode .preset-btn.active {
+  background: #00ffff !important;
+  color: #000000 !important;
+  box-shadow: 0 0 25px #00ffff !important;
 }

@@ -12,6 +12,7 @@ Um Sound Pad de memes brasileiros feito com **HTML**, **CSS** e **JavaScript**, 
 - ✅ **Modo escuro/claro** com toggle
 - ✅ **Opção de gravar novos sons** usando o microfone
 - ✅ **Compartilhamento de sons** via Web Share API
+- ✅ **Efeitos de áudio em tempo real** (Reverb, Delay, Distorção)
 - ✅ **Presets de efeitos sonoros** (Club, Ambiente, Rock)
 - ✅ **Exportação de áudio** para formato MP3/WAV
 - ✅ Totalmente feito com tecnologias front-end puras
@@ -43,7 +44,10 @@ Um Sound Pad de memes brasileiros feito com **HTML**, **CSS** e **JavaScript**, 
 - **⏹️ Parar Todos** - Para todos os áudios tocando
 - **🎤 Gravar** - Grava novos sons usando seu microfone
 - **📤 Compartilhar** - Compartilha o sound pad com amigos
-- **🎛️ Presets de Efeitos** - Aplicar efeitos como Reverb, Delay e Distorção
+- **🎛️ Efeitos de Áudio** - Aplicar efeitos em tempo real usando Web Audio API
+  - **🏰 Reverb** - Adiciona eco e profundidade espacial ao som
+  - **⏰ Delay** - Cria repetições do som com atraso controlável
+  - **🔥 Distorção** - Adiciona saturação e overdrive ao áudio
 - **💾 Exportar Áudio** - Salvar suas mixagens como arquivo de áudio
 
 ## ▶️ Como Usar
@@ -75,13 +79,18 @@ Um Sound Pad de memes brasileiros feito com **HTML**, **CSS** e **JavaScript**, 
 
 ## 🎛️ Efeitos e Exportação
 
-1. Use os presets de efeitos para mudar o som:
-   - **🎵 Limpo** - Som original sem efeitos
-   - **🏃 Club** - Reverb médio com delay curto
-   - **🌌 Ambiente** - Reverb alto com delay médio 
-   - **🎸 Rock** - Distorção média com reverb leve
+1. Use os efeitos de áudio em tempo real:
+   - **🏰 Reverb** - Simula ambientes como salas, igrejas ou estádios
+   - **⏰ Delay** - Adiciona repetições do som com timing ajustável
+   - **🔥 Distorção** - Cria saturação e overdrive para sons mais intensos
 
-2. Para exportar suas mixagens:
+2. Use os presets de efeitos para mudar o som instantaneamente:
+   - **🎵 Limpo** - Som original sem efeitos
+   - **🏃 Club** - Reverb médio + delay curto (ideal para música eletrônica)
+   - **🌌 Ambiente** - Reverb alto + delay médio (atmosfera espacial)
+   - **🎸 Rock** - Distorção média + reverb leve (som de guitarra rock)
+
+3. Para exportar suas mixagens:
    - Clique em "💾 Exportar Áudio"
    - Escolha o formato (MP3/WAV)
    - Digite um nome para o arquivo

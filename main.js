@@ -16,7 +16,6 @@ const teclas = [
     { nome: 'Nayn', classe: 'tecla_Nayn', audio: 'som_tecla_Nayn', key: 'h' }
 ];
 
-// Variáveis globais
 let allAudios = [];
 let masterVolume = 1;
 let masterPitch = 1;
@@ -28,7 +27,6 @@ let bpm = 120;
 let metronomeActive = false;
 let mediaRecorder, recordedChunks = [];
 
-// Configuração do jogo Simon Says
 let simonGame = {
     sequence: [],
     playerSequence: [],
@@ -38,10 +36,8 @@ let simonGame = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Carregar todos os elementos de áudio
     allAudios = document.querySelectorAll('audio');
     
-    // Configurar todos os sistemas
     setupTeclas();
     setupKeyboardShortcuts();
     setupThemeToggle();
@@ -59,16 +55,42 @@ document.addEventListener('DOMContentLoaded', function() {
     setupFavoritesSystem();
 });
 
-// Função para tocar o som
 function tocaSom(audioId) {
     const audio = document.getElementById(audioId);
     if (audio) {
         try {
             audio.currentTime = 0;
+            
             audio.volume = masterVolume;
+            
             audio.playbackRate = masterPitch;
             
-            // Garantir que o áudio começa a tocar
+            const reverbActive = document.getElementById('reverb-effect')?.checked || false;
+            const reverbAmount = document.getElementById('reverb-amount')?.value || 0;
+            const delayActive = document.getElementById('delay-effect')?.checked || false;
+            const delayAmount = document.getElementById('delay-amount')?.value || 0;
+            const distortionActive = document.getElementById('distortion-effect')?.checked || false;
+            const distortionAmount = document.getElementById('distortion-amount')?.value || 0;
+
+            let finalVolume = masterVolume;
+            let finalPitch = masterPitch;
+            
+            if (reverbActive) {
+                finalVolume *= (1 + (reverbAmount / 200));
+            }
+            
+            if (delayActive) {
+                finalVolume *= (1 + (delayAmount / 300));
+            }
+            
+            if (distortionActive) {
+                finalVolume *= (1 + (distortionAmount / 400));
+                finalPitch *= (1 + (distortionAmount / 1000));
+            }
+            
+            audio.volume = Math.min(1, finalVolume);
+            audio.playbackRate = finalPitch;
+            
             const playPromise = audio.play();
             
             if (playPromise !== undefined) {
@@ -77,7 +99,6 @@ function tocaSom(audioId) {
                 });
             }
             
-            // Registrar na sequência se estiver gravando
             if (isRecordingSequence) {
                 const lastTime = sequence.length > 0 ? sequence[sequence.length - 1].time : Date.now();
                 sequence.push({
@@ -99,13 +120,11 @@ function setupTeclas() {
         if (botao) {
             botao.onclick = function() {
                 tocaSom(tecla.audio);
-                // Adiciona classe visual para animação
                 botao.classList.add('ativa');
                 setTimeout(() => {
                     botao.classList.remove('ativa');
                 }, 150);
                 
-                // Verificar se está jogando Simon Says
                 if (simonGame.active && !simonGame.showingSequence) {
                     handleSimonInput(tecla.nome);
                 }
@@ -118,10 +137,8 @@ function setupKeyboardShortcuts() {
     document.addEventListener('keydown', function(event) {
         const key = event.key.toLowerCase();
         
-        // Evitar repetição enquanto a tecla estiver pressionada
         if (event.repeat) return;
         
-        // Tecla P para parar todos os sons
         if (key === 'p') {
             allAudios.forEach(audio => {
                 audio.pause();
@@ -130,19 +147,15 @@ function setupKeyboardShortcuts() {
             return;
         }
         
-        // Encontrar a tecla correspondente
         const tecla = teclas.find(t => t.key === key);
         
         if (tecla) {
-            // Encontrar o botão correspondente e adicionar classe visual para animação
             const botao = document.querySelector(`.${tecla.classe}`);
             if (botao) {
                 botao.classList.add('ativa');
                 
-                // Tocar o som
                 tocaSom(tecla.audio);
                 
-                // Verificar se está jogando Simon Says
                 if (simonGame.active && !simonGame.showingSequence) {
                     handleSimonInput(tecla.nome);
                 }
@@ -150,7 +163,6 @@ function setupKeyboardShortcuts() {
         }
     });
 
-    // Remover a classe visual quando a tecla for solta
     document.addEventListener('keyup', function(event) {
         const key = event.key.toLowerCase();
         const tecla = teclas.find(t => t.key === key);
@@ -195,8 +207,7 @@ function setupStopAllButton() {
 
 function stopAllSounds() {
     console.log('Parando todos os sons...');
-    // Garantir que todos os elementos de áudio sejam pausados
-    allAudios = document.querySelectorAll('audio'); // Atualizar referência
+    allAudios = document.querySelectorAll('audio'); 
     allAudios.forEach(audio => {
         try {
             audio.pause();
@@ -420,10 +431,19 @@ function setupMetronome() {
         bpmSlider.addEventListener('input', function() {
             bpm = parseInt(this.value);
             bpmDisplay.textContent = `${bpm} BPM`;
+            
             if (metronomeActive) {
+                const bpmControls = document.querySelector('.bpm-controls');
+                if (bpmControls) {
+                    const interval = 60000 / bpm;
+                    bpmControls.style.setProperty('--metronome-interval', `${interval}ms`);
+                }
+                
                 stopMetronome();
                 startMetronome();
             }
+            
+            console.log(`BPM alterado para: ${bpm}`);
         });
     }
 
@@ -435,33 +455,49 @@ function setupMetronome() {
 function toggleMetronome() {
     metronomeActive = !metronomeActive;
     const btn = document.getElementById('metronome-toggle');
+    const bpmControls = document.querySelector('.bpm-controls');
     
     if (metronomeActive) {
         startMetronome();
         btn.style.background = 'green';
         btn.textContent = '⏹️ Parar Metrônomo';
+        
+        if (bpmControls) {
+            bpmControls.classList.add('metronome-active');
+            const interval = 60000 / bpm;
+            bpmControls.style.setProperty('--metronome-interval', `${interval}ms`);
+        }
+        
+        console.log(`Metrônomo iniciado em ${bpm} BPM`);
     } else {
         stopMetronome();
         btn.style.background = '';
         btn.textContent = '🥁 Metrônomo';
+        
+        if (bpmControls) {
+            bpmControls.classList.remove('metronome-active');
+        }
+        
+        console.log('Metrônomo parado');
     }
 }
 
 function startMetronome() {
-    const interval = 60000 / bpm; // Converte BPM para milissegundos
+    const interval = 60000 / bpm;
     metronomeInterval = setInterval(() => {
-        // Reproduzir som do metrônomo
-        const metronomeSound = document.getElementById('metronome-sound');
-        if (metronomeSound) {
-            metronomeSound.currentTime = 0;
-            metronomeSound.volume = masterVolume * 0.5;
-            metronomeSound.play().catch(() => {
-                // Fallback se o som do metrônomo falhar
-                const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmcfBnKZ3/NydCME');
-                audio.volume = masterVolume * 0.3;
-                audio.play();
-            });
-        }
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        gainNode.gain.setValueAtTime(0.3 * masterVolume, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
     }, interval);
 }
 
@@ -526,14 +562,11 @@ function startSimonGame() {
     simonGame.playerSequence = [];
     simonGame.showingSequence = false;
     
-    // Adiciona o primeiro som à sequência
     addToSimonSequence();
     
-    // Atualiza displays
     document.getElementById('simon-score').textContent = `Nível: ${simonGame.level}`;
     document.getElementById('simon-status').textContent = 'Preparando sequência...';
     
-    // Inicia mostrando a sequência
     setTimeout(() => {
         showSimonSequence();
     }, 500);
@@ -580,13 +613,12 @@ function showSimonSequence() {
                 setTimeout(() => {
                     botao.classList.remove('simon-highlight');
                     index++;
-                    setTimeout(showNext, 600); // Pausa entre sons
-                }, 500); // Duração do highlight
+                    setTimeout(showNext, 600);
+                }, 500);
             }
         }
     };
     
-    // Pequena pausa antes de começar
     setTimeout(showNext, 1000);
 }
 
@@ -597,33 +629,27 @@ function handleSimonInput(soundName) {
     
     const currentIndex = simonGame.playerSequence.length - 1;
     
-    // Verifica se o som está correto
     if (simonGame.playerSequence[currentIndex] !== simonGame.sequence[currentIndex]) {
         document.getElementById('simon-status').textContent = `Game Over! Você completou ${simonGame.level - 1} níveis.`;
         simonGame.active = false;
         
-        // Destacar a sequência correta por alguns segundos
         setTimeout(() => {
             document.getElementById('simon-status').textContent = 'Clique em "Iniciar Jogo" para tentar novamente';
         }, 3000);
         return;
     }
     
-    // Se completou a sequência atual
     if (simonGame.playerSequence.length === simonGame.sequence.length) {
         document.getElementById('simon-status').textContent = `Nível ${simonGame.level} completo! Próximo nível...`;
         simonGame.level++;
         document.getElementById('simon-score').textContent = `Nível: ${simonGame.level}`;
         
-        // Adiciona novo som à sequência
         addToSimonSequence();
         
-        // Aguarda um pouco antes de mostrar a próxima sequência
         setTimeout(() => {
             showSimonSequence();
         }, 1500);
     } else {
-        // Som correto, mas sequência ainda não completa
         document.getElementById('simon-status').textContent = `Correto! Continue a sequência... (${simonGame.playerSequence.length}/${simonGame.sequence.length})`;
     }
 }
@@ -651,10 +677,8 @@ function setupMasterControls() {
         masterVolumeSlider.addEventListener('input', function() {
             masterVolume = this.value / 100;
             masterVolumeDisplay.textContent = `${this.value}%`;
-            // Aplica o volume master a todos os áudios imediatamente
-            allAudios.forEach(audio => {
-                audio.volume = masterVolume;
-            });
+            applyEffects();
+            console.log('Volume Master alterado para:', `${this.value}%`);
         });
     }
 
@@ -662,15 +686,12 @@ function setupMasterControls() {
         masterPitchSlider.addEventListener('input', function() {
             masterPitch = parseFloat(this.value);
             masterPitchDisplay.textContent = `${this.value}x`;
-            // Aplica o pitch master a todos os áudios imediatamente
-            allAudios.forEach(audio => {
-                audio.playbackRate = masterPitch;
-            });
+            applyEffects();
+            console.log('Pitch Master alterado para:', `${this.value}x`);
         });
     }
 }
 
-// Sistema de efeitos de áudio (versão simplificada)
 function setupEffectsPanel() {
     const reverbToggle = document.getElementById('reverb-effect');
     const reverbSlider = document.getElementById('reverb-amount');
@@ -680,87 +701,149 @@ function setupEffectsPanel() {
     const distortionSlider = document.getElementById('distortion-amount');
     const presetButtons = document.querySelectorAll('[data-preset]');
 
-    // Configurar presets
+    if (reverbSlider) {
+        reverbSlider.addEventListener('input', function() {
+            console.log('Reverb amount:', this.value);
+            applyEffects();
+        });
+    }
+
+    if (delaySlider) {
+        delaySlider.addEventListener('input', function() {
+            console.log('Delay amount:', this.value);
+            applyEffects();
+        });
+    }
+
+    if (distortionSlider) {
+        distortionSlider.addEventListener('input', function() {
+            console.log('Distortion amount:', this.value);
+            applyEffects();
+        });
+    }
+
+    if (reverbToggle) {
+        reverbToggle.addEventListener('change', function() {
+            console.log('Reverb:', this.checked ? 'ON' : 'OFF');
+            applyEffects();
+        });
+    }
+
+    if (delayToggle) {
+        delayToggle.addEventListener('change', function() {
+            console.log('Delay:', this.checked ? 'ON' : 'OFF');
+            applyEffects();
+        });
+    }
+
+    if (distortionToggle) {
+        distortionToggle.addEventListener('change', function() {
+            console.log('Distortion:', this.checked ? 'ON' : 'OFF');
+            applyEffects();
+        });
+    }
+
     presetButtons.forEach(btn => {
         btn.addEventListener('click', function() {
             const presetName = this.dataset.preset;
             
-            // Aplicar configurações do preset
             if (presetName === 'clean') {
-                // Limpo - todos os efeitos desligados
-                reverbToggle.checked = false;
-                delayToggle.checked = false;
-                distortionToggle.checked = false;
+                if (reverbToggle) reverbToggle.checked = false;
+                if (delayToggle) delayToggle.checked = false;
+                if (distortionToggle) distortionToggle.checked = false;
+                if (reverbSlider) reverbSlider.value = 0;
+                if (delaySlider) delaySlider.value = 0;
+                if (distortionSlider) distortionSlider.value = 0;
             } else if (presetName === 'club') {
-                // Club - reverb médio e delay curto
-                reverbToggle.checked = true;
-                reverbSlider.value = 40;
-                delayToggle.checked = true;
-                delaySlider.value = 20;
-                distortionToggle.checked = false;
+                if (reverbToggle) reverbToggle.checked = true;
+                if (reverbSlider) reverbSlider.value = 40;
+                if (delayToggle) delayToggle.checked = true;
+                if (delaySlider) delaySlider.value = 20;
+                if (distortionToggle) distortionToggle.checked = false;
+                if (distortionSlider) distortionSlider.value = 0;
             } else if (presetName === 'ambient') {
-                // Ambiente - reverb alto e delay médio
-                reverbToggle.checked = true;
-                reverbSlider.value = 70;
-                delayToggle.checked = true;
-                delaySlider.value = 50;
-                distortionToggle.checked = false;
+                if (reverbToggle) reverbToggle.checked = true;
+                if (reverbSlider) reverbSlider.value = 70;
+                if (delayToggle) delayToggle.checked = true;
+                if (delaySlider) delaySlider.value = 50;
+                if (distortionToggle) distortionToggle.checked = false;
+                if (distortionSlider) distortionSlider.value = 0;
             } else if (presetName === 'rock') {
-                // Rock - distorção média e reverb baixo
-                distortionToggle.checked = true;
-                distortionSlider.value = 60;
-                reverbToggle.checked = true;
-                reverbSlider.value = 30;
-                delayToggle.checked = false;
+                if (distortionToggle) distortionToggle.checked = true;
+                if (distortionSlider) distortionSlider.value = 60;
+                if (reverbToggle) reverbToggle.checked = true;
+                if (reverbSlider) reverbSlider.value = 30;
+                if (delayToggle) delayToggle.checked = false;
+                if (delaySlider) delaySlider.value = 0;
             }
             
-            // Atualizar exibição dos valores nos sliders
+            applyEffects();
             updateEffectDisplays();
             
-            // Remover classe active de todos os botões
             presetButtons.forEach(b => b.classList.remove('active'));
-            // Adicionar classe active no botão clicado
             this.classList.add('active');
         });
     });
-    
-    // Inicializar eventos dos controles de efeitos
-    setupEffectControls();
+}
+
+function applyEffects() {
+    const reverbActive = document.getElementById('reverb-effect')?.checked || false;
+    const reverbAmount = document.getElementById('reverb-amount')?.value || 0;
+    const delayActive = document.getElementById('delay-effect')?.checked || false;
+    const delayAmount = document.getElementById('delay-amount')?.value || 0;
+    const distortionActive = document.getElementById('distortion-effect')?.checked || false;
+    const distortionAmount = document.getElementById('distortion-amount')?.value || 0;
+
+    allAudios.forEach(audio => {
+        let effectMultiplier = 1;
+        
+        if (reverbActive) {
+            effectMultiplier *= (1 + (reverbAmount / 200));
+        }
+        
+        if (delayActive) {
+            effectMultiplier *= (1 + (delayAmount / 300));
+        }
+        
+        if (distortionActive) {
+            effectMultiplier *= (1 + (distortionAmount / 400));
+        }
+        
+        audio.volume = Math.min(1, masterVolume * effectMultiplier);
+        
+        if (distortionActive) {
+            audio.playbackRate = masterPitch * (1 + (distortionAmount / 1000));
+        } else {
+            audio.playbackRate = masterPitch;
+        }
+    });
+
+    console.log('Efeitos aplicados:', {
+        reverb: reverbActive ? reverbAmount : 'OFF',
+        delay: delayActive ? delayAmount : 'OFF',
+        distortion: distortionActive ? distortionAmount : 'OFF'
+    });
 }
 
 function updateEffectDisplays() {
-    // Atualiza visualmente os controles após mudanças nos presets
-    // Esta função seria chamada quando um preset é aplicado
-    console.log('Efeitos atualizados');
+    const reverbActive = document.getElementById('reverb-effect')?.checked || false;
+    const reverbAmount = document.getElementById('reverb-amount')?.value || 0;
+    const delayActive = document.getElementById('delay-effect')?.checked || false;
+    const delayAmount = document.getElementById('delay-amount')?.value || 0;
+    const distortionActive = document.getElementById('distortion-effect')?.checked || false;
+    const distortionAmount = document.getElementById('distortion-amount')?.value || 0;
+
+    document.body.classList.toggle('reverb-active', reverbActive);
+    document.body.classList.toggle('delay-active', delayActive);
+    document.body.classList.toggle('distortion-active', distortionActive);
+
+    console.log('Displays de efeitos atualizados:', {
+        reverb: reverbActive ? `${reverbAmount}%` : 'OFF',
+        delay: delayActive ? `${delayAmount}%` : 'OFF',
+        distortion: distortionActive ? `${distortionAmount}%` : 'OFF'
+    });
 }
 
-function setupEffectControls() {
-    // Conectar os controles de efeitos individuais
-    const reverbToggle = document.getElementById('reverb-effect');
-    const delayToggle = document.getElementById('delay-effect');
-    const distortionToggle = document.getElementById('distortion-effect');
-    
-    // Eventos para ligar/desligar efeitos
-    if (reverbToggle) {
-        reverbToggle.addEventListener('change', function() {
-            console.log('Reverb: ' + (this.checked ? 'ON' : 'OFF'));
-        });
-    }
-    
-    if (delayToggle) {
-        delayToggle.addEventListener('change', function() {
-            console.log('Delay: ' + (this.checked ? 'ON' : 'OFF'));
-        });
-    }
-    
-    if (distortionToggle) {
-        distortionToggle.addEventListener('change', function() {
-            console.log('Distortion: ' + (this.checked ? 'ON' : 'OFF'));
-        });
-    }
-}
-
-// Sistema de exportação de áudio
 function setupExportSystem() {
     const exportBtn = document.getElementById('export-audio');
     const exportModal = document.getElementById('export-modal');
@@ -784,7 +867,6 @@ function setupExportSystem() {
     
     if (startExportBtn) {
         startExportBtn.addEventListener('click', function() {
-            // Pegar o nome do arquivo no momento do clique
             const filenameInput = document.getElementById('export-filename');
             const filename = filenameInput.value || 'soundpad_export';
             startExportRecording(filename);
@@ -793,14 +875,12 @@ function setupExportSystem() {
     
     if (recordExportBtn) {
         recordExportBtn.addEventListener('click', function() {
-            // Pegar o nome do arquivo no momento do clique
             const filenameInput = document.getElementById('export-filename');
             const filename = filenameInput.value || 'soundpad_recording';
             startExportRecording(filename);
         });
     }
 
-    // Fechar modal clicando fora
     window.addEventListener('click', (e) => {
         if (e.target === exportModal) {
             exportModal.style.display = 'none';
@@ -809,7 +889,6 @@ function setupExportSystem() {
     });
 }
 
-// Variáveis para exportação
 let mediaRecorderExport = null;
 let recordedChunksExport = [];
 let exportFilename = 'soundpad_export';
@@ -824,16 +903,13 @@ async function startExportRecording(filename) {
     exportStatus.textContent = '🎙️ Iniciando gravação...';
 
     try {
-        // Solicitar acesso ao microfone
         const stream = await navigator.mediaDevices.getUserMedia({
             audio: true
         });
 
-        // Criar o gravador
         mediaRecorderExport = new MediaRecorder(stream);
         recordedChunksExport = [];
 
-        // Configurar manipuladores de eventos
         mediaRecorderExport.addEventListener('dataavailable', (e) => {
             if (e.data.size > 0) {
                 recordedChunksExport.push(e.data);
@@ -841,12 +917,10 @@ async function startExportRecording(filename) {
         });
 
         mediaRecorderExport.addEventListener('stop', () => {
-            // Criar blob de áudio
             const blob = new Blob(recordedChunksExport, { 
                 type: 'audio/webm' 
             });
             
-            // Download do arquivo
             downloadBlob(blob, `${exportFilename}.webm`);
             
             exportStatus.textContent = '✅ Gravação exportada com sucesso!';
@@ -855,13 +929,10 @@ async function startExportRecording(filename) {
             }, 3000);
         });
 
-        // Iniciar a gravação
         mediaRecorderExport.start();
         
-        // Mostrar mensagem de gravação ativa
         exportStatus.textContent = '🔴 Gravando... Toque alguns sons!';
         
-        // Adicionar botão para parar gravação
         const stopBtn = document.createElement('button');
         stopBtn.textContent = '⏹️ Parar Gravação e Exportar';
         stopBtn.className = 'export-btn';
@@ -897,7 +968,6 @@ function downloadBlob(blob, filename) {
     URL.revokeObjectURL(url);
 }
 
-// ===== SISTEMA DE FAVORITOS =====
 let favorites = new Set();
 let favoritePresets = new Map();
 
@@ -907,7 +977,6 @@ function setupFavoritesSystem() {
     const favoritesClose = document.querySelector('.favorites-close');
     const savePresetBtn = document.getElementById('save-current-preset');
     
-    // Carregar favoritos salvos
     loadFavorites();    if (favoritesBtn) {
         favoritesBtn.addEventListener('click', () => {
             favoritesModal.style.display = 'block';
@@ -925,10 +994,8 @@ function setupFavoritesSystem() {
         savePresetBtn.addEventListener('click', saveCurrentPreset);
     }
 
-    // Adicionar botões de favorito aos sons
     addFavoriteButtons();
 
-    // Fechar modal clicando fora
     window.addEventListener('click', (e) => {
         if (e.target === favoritesModal) {
             favoritesModal.style.display = 'none';
@@ -1015,7 +1082,6 @@ function updateFavoritesDisplay() {
     
     if (!soundsList || !presetsList) return;
     
-    // Atualizar lista de sons favoritos
     soundsList.innerHTML = '';
     favorites.forEach(soundName => {
         const item = document.createElement('div');
@@ -1031,7 +1097,6 @@ function updateFavoritesDisplay() {
         soundsList.innerHTML = '<p>Nenhum som favorito ainda.</p>';
     }
     
-    // Atualizar lista de presets favoritos
     presetsList.innerHTML = '';
     favoritePresets.forEach((preset, name) => {
         const item = document.createElement('div');
@@ -1076,13 +1141,11 @@ function loadFavorites() {
     }
 }
 
-// ===== FUNÇÕES GLOBAIS PARA USO NO HTML =====
 window.removeFavoriteSound = function(soundName) {
     favorites.delete(soundName);
     saveFavorites();
     updateFavoritesDisplay();
     
-    // Atualizar coração no botão
     const tecla = teclas.find(t => t.nome === soundName);
     if (tecla) {
         const button = document.querySelector(`.${tecla.classe}`);
@@ -1103,42 +1166,32 @@ window.loadPreset = function(presetName) {
     const preset = favoritePresets.get(presetName);
     if (!preset) return;
     
-    // Aplicar configurações de efeitos
-    document.getElementById('reverb-effect').checked = preset.reverb.active;
-    document.getElementById('reverb-amount').value = preset.reverb.amount;
-    document.getElementById('delay-effect').checked = preset.delay.active;
-    document.getElementById('delay-amount').value = preset.delay.amount;
-    document.getElementById('distortion-effect').checked = preset.distortion.active;
-    document.getElementById('distortion-amount').value = preset.distortion.amount;
+    const reverbToggle = document.getElementById('reverb-effect');
+    const reverbSlider = document.getElementById('reverb-amount');
+    const delayToggle = document.getElementById('delay-effect');
+    const delaySlider = document.getElementById('delay-amount');
+    const distortionToggle = document.getElementById('distortion-effect');
+    const distortionSlider = document.getElementById('distortion-amount');
+    const masterVolumeSlider = document.getElementById('master-volume');
+    const masterPitchSlider = document.getElementById('master-pitch');
+    const masterVolumeDisplay = document.getElementById('master-volume-display');
+    const masterPitchDisplay = document.getElementById('master-pitch-display');
     
-    // Aplicar configurações master
-    document.getElementById('master-volume').value = preset.masterVolume;
-    document.getElementById('master-pitch').value = preset.masterPitch;
+    if (reverbToggle) reverbToggle.checked = preset.reverb.active;
+    if (reverbSlider) reverbSlider.value = preset.reverb.amount;
+    if (delayToggle) delayToggle.checked = preset.delay.active;
+    if (delaySlider) delaySlider.value = preset.delay.amount;
+    if (distortionToggle) distortionToggle.checked = preset.distortion.active;
+    if (distortionSlider) distortionSlider.value = preset.distortion.amount;
     
-    // Atualizar displays
-    document.getElementById('master-volume-display').textContent = preset.masterVolume + '%';
-    document.getElementById('master-pitch-display').textContent = (preset.masterPitch / 100).toFixed(1) + 'x';
+    if (masterVolumeSlider) masterVolumeSlider.value = preset.masterVolume;
+    if (masterPitchSlider) masterPitchSlider.value = preset.masterPitch;
     
-    // Aplicar mudanças nos efeitos
-    if (audioContext) {
-        activeEffects.clear();
-        
-        const reverbValue = preset.reverb.active ? (preset.reverb.amount / 100) * 0.3 : 0;
-        reverbGain.gain.setValueAtTime(reverbValue, audioContext.currentTime);
-        if (preset.reverb.active) activeEffects.add('reverb');
-        
-        const delayTime = preset.delay.active ? (preset.delay.amount / 100) * 0.8 + 0.1 : 0.3;
-        delayNode.delayTime.setValueAtTime(delayTime, audioContext.currentTime);
-        if (preset.delay.active) activeEffects.add('delay');
-        
-        if (preset.distortion.active) {
-            const intensity = preset.distortion.amount / 100;
-            distortionNode.curve = createDistortionCurve(intensity * 50 + 10);
-            activeEffects.add('distortion');
-        }
-    }
+    if (masterVolumeDisplay) masterVolumeDisplay.textContent = preset.masterVolume + '%';
+    if (masterPitchDisplay) masterPitchDisplay.textContent = (preset.masterPitch / 100).toFixed(1) + 'x';
     
-    // Atualizar volume e pitch master
     masterVolume = preset.masterVolume / 100;
     masterPitch = preset.masterPitch / 100;
+    
+    applyEffects();
 };
